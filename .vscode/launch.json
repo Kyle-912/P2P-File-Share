@@ -7,7 +7,7 @@
             "request": "launch",
             "mainClass": "peerProcess",
             "args": [
-                "1001" // Modify to change peer #
+                "1002" // Modify to change peer #
             ]
         }
     ]

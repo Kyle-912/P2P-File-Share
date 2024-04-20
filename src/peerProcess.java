@@ -25,9 +25,9 @@ public class peerProcess {
     ArrayList<String[]> peers;
 
     public static void main(String args[]) throws Exception {
-        System.out.println("Peer " + args[0] + " is running.");
+        System.out.println("Peer " + args[0] + " is starting");
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
-        System.out.println(peerProcess.peerId); // Just here to remove unused variable warning from previous line
+        System.out.println("Peer " + peerProcess.peerId + " is running");
     }
 
     public peerProcess(int peerId) throws Exception {
@@ -36,7 +36,13 @@ public class peerProcess {
         server = new Server(peerId, 7000 + peerId);
         Thread t = new Thread(server);
         t.start();
-        start();
+        startProcess();
+    }
+
+    private void startProcess() {
+        readCommonConfig();
+        readPeerInfoConfig();
+        connectToPeers();
     }
 
     private void readCommonConfig() {
@@ -84,8 +90,10 @@ public class peerProcess {
                 }
             }
             numPieces = Math.ceilDiv(fileSize, pieceSize);
+            System.out.println("Success");
         } catch (IOException e) {
             // Handle file read error
+            System.out.println("Failure");
             e.printStackTrace();
         }
     }
@@ -103,26 +111,21 @@ public class peerProcess {
                     peers.add(parts);
                 }
             }
+            System.out.println("Success");
         } catch (IOException e) {
             // Handle file read error
+            System.out.println("Failure");
             e.printStackTrace();
         }
     }
 
     private void connectToPeers() {
+        System.out.println("Connecting to peers");
         for (int i = 1001; i<peerId; i++) {
             System.out.println("Connecting to peer " + i);
             Client client = new Client("localhost", 7000 + i);
             Thread t = new Thread(client);
             t.start();
         }
-    }
-
-    private void start() {
-        System.out.println("Starting");
-        readCommonConfig();
-        numPieces = Math.ceilDiv(fileSize, pieceSize);
-        readPeerInfoConfig();
-        connectToPeers();
     }
 }
