@@ -3,12 +3,12 @@ import java.io.*;
 
 public class Server implements Runnable{
 
-	int peerId;
-	int sPort;
+	int _peerId;
+	int _sPort;
 
 	public Server(int peerId, int sPort) throws Exception {
-		this.peerId = peerId;
-		this.sPort = sPort;
+		_peerId = peerId;
+		_sPort = sPort;
 	}
 
 	public void run() {
@@ -20,8 +20,8 @@ public class Server implements Runnable{
 	}
 
 	public void start() throws IOException{
-		System.out.println("Peer " + peerId + "'s server listening on port " + sPort);
-		ServerSocket listener = new ServerSocket(sPort);
+		System.out.println("Peer " + _peerId + "'s server listening on port " + _sPort);
+		ServerSocket listener = new ServerSocket(_sPort);
 		int peerNum = 1001;
 		try {
 			while (true) {
@@ -41,28 +41,28 @@ public class Server implements Runnable{
 	private static class Handler extends Thread {
 		private String message; // message received from the client
 		private String MESSAGE; // uppercase message send to the client
-		private Socket connection;
-		private ObjectInputStream in; // stream read from the socket
-		private ObjectOutputStream out; // stream write to the socket
-		private int no; // The index number of the client
+		private Socket _connection;
+		private ObjectInputStream _in; // stream read from the socket
+		private ObjectOutputStream _out; // stream write to the socket
+		private int _clientId; // The index number of the client
 
-		public Handler(Socket connection, int no) {
-			this.connection = connection;
-			this.no = no;
+		public Handler(Socket connection, int clientPeerId) {
+			_connection = connection;
+			_clientId = clientPeerId;
 		}
 
 		public void run() {
 			try {
 				// initialize Input and Output streams
-				out = new ObjectOutputStream(connection.getOutputStream());
-				out.flush();
-				in = new ObjectInputStream(connection.getInputStream());
+				_out = new ObjectOutputStream(_connection.getOutputStream());
+				_out.flush();
+				_in = new ObjectInputStream(_connection.getInputStream());
 				try {
 					while (true) {
 						// receive the message sent from the client
-						message = (String) in.readObject();
+						message = (String) _in.readObject();
 						// show the message to the user
-						System.out.println("Receive message: " + message + " from client " + no);
+						System.out.println("Receive message: " + message + " from client " + _clientId);
 						// Capitalize all letters in the message
 						MESSAGE = message.toUpperCase();
 						// send MESSAGE back to the client
@@ -72,15 +72,15 @@ public class Server implements Runnable{
 					System.err.println("Data received in unknown format");
 				}
 			} catch (IOException ioException) {
-				System.out.println("Disconnect with Client " + no);
+				System.out.println("Disconnect with Client " + _clientId);
 			} finally {
 				// Close connections
 				try {
-					in.close();
-					out.close();
-					connection.close();
+					_in.close();
+					_out.close();
+					_connection.close();
 				} catch (IOException ioException) {
-					System.out.println("Disconnect with Client " + no);
+					System.out.println("Disconnect with Client " + _clientId);
 				}
 			}
 		}
@@ -88,9 +88,9 @@ public class Server implements Runnable{
 		// send a message to the output stream
 		public void sendMessage(String msg) {
 			try {
-				out.writeObject(msg);
-				out.flush();
-				System.out.println("Send message: " + msg + " to Client " + no);
+				_out.writeObject(msg);
+				_out.flush();
+				System.out.println("Send message: " + msg + " to Client " + _clientId);
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
 			}

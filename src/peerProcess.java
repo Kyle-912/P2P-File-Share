@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class peerProcess {
     // File locations
@@ -9,34 +10,41 @@ public class peerProcess {
     static final String PEER_INFO_FILENAME = "PeerInfo.cfg";
 
     // Config variables
-    int numPreferredNeighbors;
-    int unchokingInterval;
-    int optimisticUnchokingInterval;
-    String fileName;
-    int fileSize;
-    int pieceSize;
-    int numPieces;
+    int _numPreferredNeighbors;
+    int _unchokingInterval;
+    int _optimisticUnchokingInterval;
+    String _fileName;
+    int _fileSize;
+    int _pieceSize;
+    int _numPieces;
 
     // Member Variables
-    int peerId;
-    Server server;
-    HashMap<Integer, Client> clients;
-    HashMap<Integer, PeerInfo> peers;
+    int _peerId;
+    Integer _optimisticallyUnchokedPeerId;
+    byte[] _bitfield; 
+    ConcurrentHashMap<Integer, byte[]> _peerBitFields = new ConcurrentHashMap<>();  // Key: Peer ID, Value: Bitfield
+    ArrayList<Integer> _prefferedPeerIds = new ArrayList<>();                       // List of preferred peer IDs   
+    ArrayList<Integer> _interestedPeerIds = new ArrayList<>();                      // List of interested peer IDs
+    ArrayList<Integer> _requests = new ArrayList<>();                               // List of requested piece indices
+    
+
+
+    Server _server;
+    ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
+    ConcurrentHashMap<Integer, PeerInfo> _peers = new ConcurrentHashMap<>();
 
     public static void main(String args[]) throws Exception {
         System.out.println("Peer " + args[0] + " is starting");
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
-        System.out.println("Peer " + peerProcess.peerId + " is running");
+        System.out.println("Peer " + peerProcess._peerId + " is running");
     }
 
     public peerProcess(int peerId) throws Exception {
-        this.peerId = peerId;
-        peers = new HashMap<>();
-        clients = new HashMap<>();
+        this._peerId = peerId;
         readCommonConfig();
         readPeerInfoConfig();
-        server = new Server(peerId, peers.get(peerId)._listenerPort);
-        Thread serverThread = new Thread(server);
+        _server = new Server(peerId, _peers.get(peerId)._listenerPort);
+        Thread serverThread = new Thread(_server);
         serverThread.start();
         connectToPeers();
     }
@@ -56,27 +64,27 @@ public class peerProcess {
                     String value = parts[1];
                     switch (key) {
                         case "NumberOfPreferredNeighbors":
-                            numPreferredNeighbors = Integer.parseInt(value);
+                            _numPreferredNeighbors = Integer.parseInt(value);
                             break;
 
                         case "UnchokingInterval":
-                            unchokingInterval = Integer.parseInt(value);
+                            _unchokingInterval = Integer.parseInt(value);
                             break;
 
                         case "OptimisticUnchokingInterval":
-                            optimisticUnchokingInterval = Integer.parseInt(value);
+                            _optimisticUnchokingInterval = Integer.parseInt(value);
                             break;
 
                         case "FileName":
-                            fileName = value;
+                            _fileName = value;
                             break;
 
                         case "FileSize":
-                            fileSize = Integer.parseInt(value);
+                            _fileSize = Integer.parseInt(value);
                             break;
 
                         case "PieceSize":
-                            pieceSize = Integer.parseInt(value);
+                            _pieceSize = Integer.parseInt(value);
                             break;
 
                         default:
@@ -85,7 +93,7 @@ public class peerProcess {
                     }
                 }
             }
-            numPieces = Math.ceilDiv(fileSize, pieceSize);
+            _numPieces = Math.ceilDiv(_fileSize, _pieceSize);
             System.out.println("Success");
         } catch (IOException e) {
             // Handle file read error
@@ -105,7 +113,7 @@ public class peerProcess {
 
                 if (parts.length == 4) {
                     PeerInfo pInfo = new PeerInfo(parts[0], parts[1], parts[2], parts[3]);
-                    peers.put(pInfo._pid, pInfo);
+                    _peers.put(pInfo._pid, pInfo);
                 }
             }
             System.out.println("Success");
@@ -118,10 +126,10 @@ public class peerProcess {
 
     private void connectToPeers() {
         System.out.println("Connecting to peers");
-        for (int i = 1001; i < peerId; i++) {
+        for (int i = 1001; i < _peerId; i++) {
             System.out.println("Connecting to peer " + i);
-            Client client = new Client(peers.get(i)._hostname, peers.get(i)._listenerPort);
-            clients.put(i, client);
+            Client client = new Client(_peers.get(i)._hostname, _peers.get(i)._listenerPort);
+            _clients.put(i, client);
             Thread clientThread = new Thread(client);
             clientThread.start();
         }

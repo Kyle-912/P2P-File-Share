@@ -2,27 +2,27 @@ import java.net.*;
 import java.io.*;
 
 public class Client implements Runnable{
-	Socket requestSocket; // socket connect to the server
-	ObjectOutputStream out; // stream write to the socket
-	ObjectInputStream in; // stream read from the socket
+	Socket _requestSocket; // socket connect to the server
+	ObjectOutputStream _out; // stream write to the socket
+	ObjectInputStream _in; // stream read from the socket
 	String message; // message send to the server
 	String MESSAGE; // capitalized message read from the server
-	String host;
-	int portNum;
+	String _hostName;
+	int _portNum;
 
 	public Client(String host, int portNum) {
-		this.host = host;
-		this.portNum = portNum;
+		_hostName = host;
+		_portNum = portNum;
 	}
 
 	public void run() {
 		try {
 			// create a socket to connect to the server
-			requestSocket = new Socket(host, portNum);
+			_requestSocket = new Socket(_hostName, _portNum);
 			// initialize inputStream and outputStream
-			out = new ObjectOutputStream(requestSocket.getOutputStream());
-			out.flush();
-			in = new ObjectInputStream(requestSocket.getInputStream());
+			_out = new ObjectOutputStream(_requestSocket.getOutputStream());
+			_out.flush();
+			_in = new ObjectInputStream(_requestSocket.getInputStream());
 
 			// get Input from standard input
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -33,7 +33,7 @@ public class Client implements Runnable{
 				// Send the sentence to the server
 				sendMessage(message);
 				// Receive the upperCase sentence from the server
-				MESSAGE = (String) in.readObject();
+				MESSAGE = (String) _in.readObject();
 				// show the message to the user
 				System.out.println("Receive message: " + MESSAGE);
 			}
@@ -48,9 +48,9 @@ public class Client implements Runnable{
 		} finally {
 			// Close connections
 			try {
-				in.close();
-				out.close();
-				requestSocket.close();
+				_in.close();
+				_out.close();
+				_requestSocket.close();
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
 			}
@@ -61,8 +61,8 @@ public class Client implements Runnable{
 	void sendMessage(String msg) {
 		try {
 			// stream write the message
-			out.writeObject(msg);
-			out.flush();
+			_out.writeObject(msg);
+			_out.flush();
 		} catch (IOException ioException) {
 			ioException.printStackTrace();
 		}
