@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "peerProcess",
+            "request": "launch",
+            "mainClass": "peerProcess",
+            "projectName": "P2P-File-Share_938775b4"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "args": [
+                "1002"
+            ]
+        }
+    ]
+}
