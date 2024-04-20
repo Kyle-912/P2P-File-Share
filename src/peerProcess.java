@@ -27,6 +27,7 @@ public class peerProcess {
     public static void main(String args[]) throws Exception {
         System.out.println("Peer " + args[0] + " is running.");
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
+        System.out.println(peerProcess.peerId); // Just here to remove unused variable warning from previous line
     }
 
     public peerProcess(int peerId) throws Exception {
