@@ -134,7 +134,6 @@ public class peerProcess {
             try {
                 log.LogTCPTo(_peers.get(i)._pid);
             } catch (IOException e) {
-                // Handle the exception (e.g., print error message, log, etc.)
                 e.printStackTrace();
             }
         }
