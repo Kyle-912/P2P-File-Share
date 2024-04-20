@@ -26,6 +26,7 @@ public class peerProcess {
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
     ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
+    Log log = new Log(_peerId);
 
     Server _server;
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
@@ -130,6 +131,12 @@ public class peerProcess {
             _clients.put(i, client);
             Thread clientThread = new Thread(client);
             clientThread.start();
+            try {
+                log.LogTCPTo(_peers.get(i)._pid);
+            } catch (IOException e) {
+                // Handle the exception (e.g., print error message, log, etc.)
+                e.printStackTrace();
+            }
         }
     }
 }
