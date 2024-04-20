@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class Client implements Runnable{
+public class Client implements Runnable {
 	Socket _requestSocket; // socket connect to the server
 	ObjectOutputStream _out; // stream write to the socket
 	ObjectInputStream _in; // stream read from the socket
@@ -67,5 +67,4 @@ public class Client implements Runnable{
 			ioException.printStackTrace();
 		}
 	}
-
 }

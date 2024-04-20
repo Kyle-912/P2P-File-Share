@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class Server implements Runnable{
+public class Server implements Runnable {
 
 	int _peerId;
 	int _sPort;
@@ -14,12 +14,12 @@ public class Server implements Runnable{
 	public void run() {
 		try {
 			start();
-		} catch (Exception e){
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
-	public void start() throws IOException{
+	public void start() throws IOException {
 		System.out.println("Peer " + _peerId + "'s server listening on port " + _sPort);
 		ServerSocket listener = new ServerSocket(_sPort);
 		int peerNum = 1001;
@@ -95,7 +95,5 @@ public class Server implements Runnable{
 				ioException.printStackTrace();
 			}
 		}
-
 	}
-
 }
