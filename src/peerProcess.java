@@ -41,7 +41,7 @@ public class peerProcess {
         this._peerId = peerId;
         readCommonConfig();
         readPeerInfoConfig();
-        _server = new Server(peerId, _peers.get(peerId)._listenerPort);
+        _server = new Server(peerId, _peers.get(peerId)._listenerPort, this);
         Thread serverThread = new Thread(_server);
         serverThread.start();
         connectToPeers();

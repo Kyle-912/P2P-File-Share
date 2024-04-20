@@ -2,6 +2,7 @@ import java.net.*;
 import java.io.*;
 
 public class Client implements Runnable{
+	peerProcess _peerProcess; //parentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
 	Socket _requestSocket; // socket connect to the server
 	ObjectOutputStream _out; // stream write to the socket
 	ObjectInputStream _in; // stream read from the socket
