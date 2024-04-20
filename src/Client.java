@@ -68,5 +68,4 @@ public class Client implements Runnable{
 			ioException.printStackTrace();
 		}
 	}
-
 }
