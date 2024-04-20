@@ -1,14 +1,15 @@
 import java.net.*;
 import java.io.*;
 
-public class Server implements Runnable {
-
+public class Server implements Runnable{
+	peerProcess _peerProcess; //parentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
 	int _peerId;
 	int _sPort;
 
-	public Server(int peerId, int sPort) throws Exception {
+	public Server(int peerId, int sPort, peerProcess parent) throws Exception {
 		_peerId = peerId;
 		_sPort = sPort;
+		_peerProcess = parent;
 	}
 
 	public void run() {
@@ -25,7 +26,7 @@ public class Server implements Runnable {
 		int peerNum = 1001;
 		try {
 			while (true) {
-				new Handler(listener.accept(), peerNum).start();
+				new Handler(listener.accept(), peerNum, _peerProcess).start();
 				System.out.println("Client is connected!");
 				peerNum++;
 			}
@@ -39,6 +40,7 @@ public class Server implements Runnable {
 	 * loop and are responsible for dealing with a single client's requests.
 	 */
 	private static class Handler extends Thread {
+		peerProcess _peerProcess; //parentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
 		private String message; // message received from the client
 		private String MESSAGE; // uppercase message send to the client
 		private Socket _connection;
@@ -46,9 +48,10 @@ public class Server implements Runnable {
 		private ObjectOutputStream _out; // stream write to the socket
 		private int _clientId; // The index number of the client
 
-		public Handler(Socket connection, int clientPeerId) {
+		public Handler(Socket connection, int clientPeerId, peerProcess parent) {
 			_connection = connection;
 			_clientId = clientPeerId;
+			_peerProcess = parent;
 		}
 
 		public void run() {
