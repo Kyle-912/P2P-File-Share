@@ -19,7 +19,6 @@ public class Client implements Runnable{
 		try {
 			// create a socket to connect to the server
 			requestSocket = new Socket(host, portNum);
-			System.out.println("Connected to Peer " + (portNum-7000) + " at " + host + ":" + portNum);
 			// initialize inputStream and outputStream
 			out = new ObjectOutputStream(requestSocket.getOutputStream());
 			out.flush();

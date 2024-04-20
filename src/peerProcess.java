@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class peerProcess {
@@ -22,7 +21,7 @@ public class peerProcess {
     int peerId;
     Server server;
     HashMap<Integer, Client> clients;
-    ArrayList<String[]> peers;
+    HashMap<Integer, PeerInfo> peers;
 
     public static void main(String args[]) throws Exception {
         System.out.println("Peer " + args[0] + " is starting");
@@ -32,16 +31,13 @@ public class peerProcess {
 
     public peerProcess(int peerId) throws Exception {
         this.peerId = peerId;
-        peers = new ArrayList<>();
-        server = new Server(peerId, 7000 + peerId);
-        Thread t = new Thread(server);
-        t.start();
-        startProcess();
-    }
-
-    private void startProcess() {
+        peers = new HashMap<>();
+        clients = new HashMap<>();
         readCommonConfig();
         readPeerInfoConfig();
+        server = new Server(peerId, peers.get(peerId)._listenerPort);
+        Thread serverThread = new Thread(server);
+        serverThread.start();
         connectToPeers();
     }
 
@@ -108,7 +104,8 @@ public class peerProcess {
                 String[] parts = line.split(" ");
 
                 if (parts.length == 4) {
-                    peers.add(parts);
+                    PeerInfo pInfo = new PeerInfo(parts[0], parts[1], parts[2], parts[3]);
+                    peers.put(pInfo._pid, pInfo);
                 }
             }
             System.out.println("Success");
@@ -123,9 +120,10 @@ public class peerProcess {
         System.out.println("Connecting to peers");
         for (int i = 1001; i < peerId; i++) {
             System.out.println("Connecting to peer " + i);
-            Client client = new Client("localhost", 7000 + i);
-            Thread t = new Thread(client);
-            t.start();
+            Client client = new Client(peers.get(i)._hostname, peers.get(i)._listenerPort);
+            clients.put(i, client);
+            Thread clientThread = new Thread(client);
+            clientThread.start();
         }
     }
 }
