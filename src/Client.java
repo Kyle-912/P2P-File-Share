@@ -11,9 +11,11 @@ public class Client implements Runnable{
 	String _hostName;
 	int _portNum;
 
-	public Client(String host, int portNum) {
+	public Client(String host, int portNum, peerProcess parent) {
+		_peerProcess = parent;
 		_hostName = host;
 		_portNum = portNum;
+		
 	}
 
 	public void run() {

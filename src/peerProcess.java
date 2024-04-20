@@ -36,6 +36,7 @@ public class peerProcess {
         System.out.println("Peer " + args[0] + " is starting");
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
         System.out.println("Peer " + peerProcess._peerId + " is running");
+        System.out.println(Message.getHandshakeMsg(_peerId));
     }
 
     public peerProcess(int peerId) throws Exception {
@@ -127,7 +128,7 @@ public class peerProcess {
         System.out.println("Connecting to peers");
         for (int i = 1001; i < _peerId; i++) {
             System.out.println("Connecting to peer " + i);
-            Client client = new Client(_peers.get(i)._hostname, _peers.get(i)._listenerPort);
+            Client client = new Client(_peers.get(i)._hostname, _peers.get(i)._listenerPort, this);
             _clients.put(i, client);
             Thread clientThread = new Thread(client);
             clientThread.start();
