@@ -21,13 +21,11 @@ public class peerProcess {
     // Member Variables
     int _peerId;
     Integer _optimisticallyUnchokedPeerId;
-    byte[] _bitfield; 
-    ConcurrentHashMap<Integer, byte[]> _peerBitFields = new ConcurrentHashMap<>();  // Key: Peer ID, Value: Bitfield
-    ArrayList<Integer> _prefferedPeerIds = new ArrayList<>();                       // List of preferred peer IDs   
-    ArrayList<Integer> _interestedPeerIds = new ArrayList<>();                      // List of interested peer IDs
-    ArrayList<Integer> _requests = new ArrayList<>();                               // List of requested piece indices
-    
-
+    byte[] _bitfield;
+    ConcurrentHashMap<Integer, byte[]> _peerBitFields = new ConcurrentHashMap<>(); // Key: Peer ID, Value: Bitfield
+    ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
+    ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
+    ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
 
     Server _server;
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
