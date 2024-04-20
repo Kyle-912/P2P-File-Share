@@ -121,7 +121,7 @@ public class peerProcess {
 
     private void connectToPeers() {
         System.out.println("Connecting to peers");
-        for (int i = 1001; i<peerId; i++) {
+        for (int i = 1001; i < peerId; i++) {
             System.out.println("Connecting to peer " + i);
             Client client = new Client("localhost", 7000 + i);
             Thread t = new Thread(client);
