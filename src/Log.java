@@ -4,6 +4,19 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+	// LOG MESSAGE TYPES: 
+		// 0. TCP Connection (to)
+		// 1. TCP Connection (from)
+		// 2. Neighbor change
+		// 3. Optimistically unchoked peer change
+		// 4. Unchoked
+		// 5. Choked
+		// 6. Received "Have"
+		// 7. Received "Interested"
+		// 8. Received "Not Interested" 
+		// 9. Downloaded piece
+		// 10. Completely downloaded
+
 public class Log {
     private File _peerLog;
     private FileWriter _writer;
