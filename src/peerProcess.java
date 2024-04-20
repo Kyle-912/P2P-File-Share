@@ -24,6 +24,11 @@ public class peerProcess {
     HashMap<Integer, Client> clients;
     ArrayList<String[]> peers;
 
+    public static void main(String args[]) throws Exception {
+        System.out.println("Peer " + args[0] + " is running.");
+        peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
+    }
+
     public peerProcess(int peerId) throws Exception {
         this.peerId = peerId;
         peers = new ArrayList<>();
@@ -85,7 +90,7 @@ public class peerProcess {
     }
 
     private void readPeerInfoConfig() {
-        
+
         String filePath = System.getProperty("user.dir") + "/" + PEER_INFO_FILENAME;
         System.out.println("Attempting to read file: " + filePath); // Debug information
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -119,10 +124,4 @@ public class peerProcess {
         readPeerInfoConfig();
         connectToPeers();
     }
-
-    public static void main(String args[]) throws Exception {
-        System.out.println("Peer " + args[0] + " is running.");
-        peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
-    }
-
 }
