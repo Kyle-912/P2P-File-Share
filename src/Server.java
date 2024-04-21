@@ -46,16 +46,18 @@ public class Server implements Runnable {
 		public Handler(Socket connection, peerProcess parent) {
 			_connection = connection;
 			_peerProcess = parent;
-		}
-
-		public void run() {
-			try {
-				// Initialize input and output streams
+			// Initialize input and output streams
+			try{
 				_out = new ObjectOutputStream(_connection.getOutputStream());
 				_out.flush();
 				_in = new ObjectInputStream(_connection.getInputStream());
-				try {
-					_messageIn = (byte[]) _in.readObject();
+			} catch (Exception e){
+				System.out.println("Error setting up input and output streams");
+			}
+
+			// Handshake from client
+			try{
+				_messageIn = (byte[]) _in.readObject();
 					_clientId = Message.readHandshakeMsg(_messageIn);
 
 					// Log connection
@@ -68,19 +70,28 @@ public class Server implements Runnable {
 
 					if (_clientId > _peerProcess._peerId) {
 						_peerProcess.connectToPeer(_clientId);
+						//send bitmap
+						
+						//
 					}
+			} catch (Exception e){
+				System.out.println("Error receiving handshake message");
+			}
 
-					while (true) {
-						// Loop
-					}
 
-				} catch (ClassNotFoundException classnot) {
-					System.err.println("Data received in unknown format");
-				} catch (Exception e) {
-					System.err.println(e);
+		}
+
+		public void run() {
+			try {
+				//used to get the catch to shut up for now DELETE LATER
+				_out.flush();
+				System.out.println("NowRunnnig" + _clientId);
+				while (true) {
+					// Loop
 				}
-			} catch (IOException ioException) {
-				System.out.println("Disconnect with Client " + _clientId);
+
+			} catch (Exception e) {
+				System.err.println(e);
 			} finally {
 				// Close connections
 				try {
