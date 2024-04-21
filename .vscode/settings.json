@@ -7,5 +7,7 @@
     "cSpell.words": [
         "Unchoked",
         "unchoking"
-    ]
+    ],
+    "cSpell.enabled": true,
+    "java.format.settings.url": "eclipse-formatter.xml"
 }

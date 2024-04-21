@@ -1,8 +1,8 @@
 import java.net.*;
 import java.io.*;
 
-public class Server implements Runnable{
-	peerProcess _peerProcess; //parentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
+public class Server implements Runnable {
+	peerProcess _peerProcess; // ParentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
 	int _peerId;
 	int _sPort;
 
@@ -35,12 +35,12 @@ public class Server implements Runnable{
 	 * loop and are responsible for dealing with a single client's requests.
 	 */
 	private static class Handler extends Thread {
-		peerProcess _peerProcess; //parentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
-		private byte[] _messageIn; // message received from the client
-		//private byte[] _messageOut; // uppercase message send to the client
+		peerProcess _peerProcess; // ParentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
+		private byte[] _messageIn; // Message received from the client
+		//private byte[] _messageOut; // Message sent to the client
 		private Socket _connection;
-		private ObjectInputStream _in; // stream read from the socket
-		private ObjectOutputStream _out; // stream write to the socket
+		private ObjectInputStream _in; // Stream read from the socket
+		private ObjectOutputStream _out; // Stream written to the socket
 		private int _clientId; // The index number of the client
 
 		public Handler(Socket connection, peerProcess parent) {
@@ -50,21 +50,30 @@ public class Server implements Runnable{
 
 		public void run() {
 			try {
-				// initialize Input and Output streams
+				// Initialize input and output streams
 				_out = new ObjectOutputStream(_connection.getOutputStream());
 				_out.flush();
 				_in = new ObjectInputStream(_connection.getInputStream());
 				try {
 					_messageIn = (byte[]) _in.readObject();
 					_clientId = Message.readHandshakeMsg(_messageIn);
+
+					// Log connection
 					System.out.println("LOG: Peer " + _peerProcess._peerId + " is connected from Peer " + _clientId);
+					try {
+						_peerProcess.log.LogTCPTo(_clientId);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
 					if (_clientId > _peerProcess._peerId) {
 						_peerProcess.connectToPeer(_clientId);
 					}
 
 					while (true) {
-						// LOOP
+						// Loop
 					}
+
 				} catch (ClassNotFoundException classnot) {
 					System.err.println("Data received in unknown format");
 				} catch (Exception e) {
@@ -84,7 +93,7 @@ public class Server implements Runnable{
 			}
 		}
 
-		// send a message to the output stream
+		// Send a message to the output stream
 		public void sendMessage(String msg) {
 			try {
 				_out.writeObject(msg);

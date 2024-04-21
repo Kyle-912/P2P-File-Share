@@ -1,13 +1,13 @@
 import java.net.*;
 import java.io.*;
 
-public class Client implements Runnable{
-	peerProcess _peerProcess; //parentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
-	Socket _requestSocket; // socket connect to the server
-	ObjectOutputStream _out; // stream write to the socket
-	ObjectInputStream _in; // stream read from the socket
-	byte[] _messageOut; // message send to the server
-	byte[] _messageIn; // capitalized message read from the server
+public class Client implements Runnable {
+	peerProcess _peerProcess; // ParentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
+	Socket _requestSocket; // Socket connected to the server
+	ObjectOutputStream _out; // Stream written to the socket
+	ObjectInputStream _in; // Stream read from the socket
+	byte[] _messageOut; // Message sent to the server
+	byte[] _messageIn; // Message read from the server
 	String _hostName;
 	int _portNum;
 	int _serverId;
@@ -21,16 +21,23 @@ public class Client implements Runnable{
 
 	public void run() {
 		try {
-			// create a socket to connect to the server
+			// Create a socket to connect to the server
 			_requestSocket = new Socket(_hostName, _portNum);
-			// initialize inputStream and outputStream
+			// Initialize input and output streams
 			_out = new ObjectOutputStream(_requestSocket.getOutputStream());
 			_out.flush();
 			_in = new ObjectInputStream(_requestSocket.getInputStream());
 
-			// Send Handshake Message
+			// Send handshake message
 			sendMessage(Message.getHandshakeMsg(_peerProcess._peerId));
+
+			// Log connection
 			System.out.println("LOG: Peer " + _peerProcess._peerId + " makes a connection to " + _serverId);
+			try {
+				_peerProcess.log.LogTCPTo(_serverId);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
 			while (true) {
 				// Loop
@@ -56,10 +63,10 @@ public class Client implements Runnable{
 		}
 	}
 
-	// send a message to the output stream
+	// Send a message to the output stream
 	void sendMessage(byte[] msg) {
 		try {
-			// stream write the message
+			// Stream write the message
 			synchronized (_out) {
 				_out.writeObject(msg);
 				_out.flush();

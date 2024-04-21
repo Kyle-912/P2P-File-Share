@@ -26,11 +26,10 @@ public class peerProcess {
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
     ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
-    Log log = new Log(_peerId);
-
     Server _server;
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
     ConcurrentHashMap<Integer, PeerInfo> _peers = new ConcurrentHashMap<>();
+    Log log = new Log();
 
     public static void main(String args[]) throws Exception {
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
@@ -39,6 +38,7 @@ public class peerProcess {
 
     public peerProcess(int peerId) throws Exception {
         this._peerId = peerId;
+        log.setLogPid(peerId);
         readCommonConfig();
         readPeerInfoConfig();
         startServer();
@@ -97,7 +97,6 @@ public class peerProcess {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
-
                 if (parts.length == 4) {
                     PeerInfo pInfo = new PeerInfo(parts[0], parts[1], parts[2], parts[3]);
                     _peers.put(pInfo._pid, pInfo);
@@ -126,10 +125,5 @@ public class peerProcess {
         _clients.put(i, client);
         Thread clientThread = new Thread(client);
         clientThread.start();
-        try {
-            log.LogTCPTo(_peers.get(i)._pid);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
