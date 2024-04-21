@@ -70,6 +70,9 @@ public class Server implements Runnable {
 
 					if (_clientId > _peerProcess._peerId) {
 						_peerProcess.connectToPeer(_clientId);
+						//send bitmap
+						
+						//
 					}
 			} catch (Exception e){
 				System.out.println("Error receiving handshake message");
