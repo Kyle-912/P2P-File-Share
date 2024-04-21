@@ -47,14 +47,10 @@ public class peerProcess {
 
     private void readCommonConfig() {
         String filePath = System.getProperty("user.dir") + "/" + COMMON_FILENAME;
-
-        //System.out.println("Attempting to read file: " + filePath); // Debug information
-
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
-
                 if (parts.length == 2) {
                     String key = parts[0];
                     String value = parts[1];
@@ -84,24 +80,19 @@ public class peerProcess {
                             break;
 
                         default:
-                            // Handle unknown keys or invalid configurations
                             break;
                     }
                 }
             }
             _numPieces = Math.ceilDiv(_fileSize, _pieceSize);
-            //System.out.println("Success");
         } catch (IOException e) {
-            // Handle file read error
-            //System.out.println("Failure");
+            System.out.println("Failure to read file: " + filePath);
             e.printStackTrace();
         }
     }
 
     private void readPeerInfoConfig() {
-
         String filePath = System.getProperty("user.dir") + "/" + PEER_INFO_FILENAME;
-        //System.out.println("Attempting to read file: " + filePath); // Debug information
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -112,10 +103,8 @@ public class peerProcess {
                     _peers.put(pInfo._pid, pInfo);
                 }
             }
-            //System.out.println("Success");
         } catch (IOException e) {
-            // Handle file read error
-            //System.out.println("Failure");
+            System.out.println("Failure to read file: " + filePath);
             e.printStackTrace();
         }
     }
