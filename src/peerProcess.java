@@ -33,26 +33,22 @@ public class peerProcess {
     ConcurrentHashMap<Integer, PeerInfo> _peers = new ConcurrentHashMap<>();
 
     public static void main(String args[]) throws Exception {
-        System.out.println("Peer " + args[0] + " is starting");
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
         System.out.println("Peer " + peerProcess._peerId + " is running");
-        System.out.println(Message.getHandshakeMsg(_peerId));
     }
 
     public peerProcess(int peerId) throws Exception {
         this._peerId = peerId;
         readCommonConfig();
         readPeerInfoConfig();
-        _server = new Server(peerId, _peers.get(peerId)._listenerPort, this);
-        Thread serverThread = new Thread(_server);
-        serverThread.start();
+        startServer();
         connectToPeers();
     }
 
     private void readCommonConfig() {
         String filePath = System.getProperty("user.dir") + "/" + COMMON_FILENAME;
 
-        System.out.println("Attempting to read file: " + filePath); // Debug information
+        //System.out.println("Attempting to read file: " + filePath); // Debug information
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -94,10 +90,10 @@ public class peerProcess {
                 }
             }
             _numPieces = Math.ceilDiv(_fileSize, _pieceSize);
-            System.out.println("Success");
+            //System.out.println("Success");
         } catch (IOException e) {
             // Handle file read error
-            System.out.println("Failure");
+            //System.out.println("Failure");
             e.printStackTrace();
         }
     }
@@ -105,7 +101,7 @@ public class peerProcess {
     private void readPeerInfoConfig() {
 
         String filePath = System.getProperty("user.dir") + "/" + PEER_INFO_FILENAME;
-        System.out.println("Attempting to read file: " + filePath); // Debug information
+        //System.out.println("Attempting to read file: " + filePath); // Debug information
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -116,27 +112,35 @@ public class peerProcess {
                     _peers.put(pInfo._pid, pInfo);
                 }
             }
-            System.out.println("Success");
+            //System.out.println("Success");
         } catch (IOException e) {
             // Handle file read error
-            System.out.println("Failure");
+            //System.out.println("Failure");
             e.printStackTrace();
         }
     }
 
+    private void startServer() throws Exception {
+        _server = new Server(_peers.get(_peerId)._listenerPort, this);
+        Thread serverThread = new Thread(_server);
+        serverThread.start();
+    }
+
     private void connectToPeers() {
-        System.out.println("Connecting to peers");
         for (int i = 1001; i < _peerId; i++) {
-            System.out.println("Connecting to peer " + i);
-            Client client = new Client(_peers.get(i)._hostname, _peers.get(i)._listenerPort, this);
-            _clients.put(i, client);
-            Thread clientThread = new Thread(client);
-            clientThread.start();
-            try {
-                log.LogTCPTo(_peers.get(i)._pid);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            connectToPeer(i);
+        }
+    }
+
+    public void connectToPeer(int i) {
+        Client client = new Client(_peers.get(i)._hostname, _peers.get(i)._listenerPort, i, this);
+        _clients.put(i, client);
+        Thread clientThread = new Thread(client);
+        clientThread.start();
+        try {
+            log.LogTCPTo(_peers.get(i)._pid);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

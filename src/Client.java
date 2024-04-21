@@ -6,16 +6,17 @@ public class Client implements Runnable{
 	Socket _requestSocket; // socket connect to the server
 	ObjectOutputStream _out; // stream write to the socket
 	ObjectInputStream _in; // stream read from the socket
-	String message; // message send to the server
-	String MESSAGE; // capitalized message read from the server
+	byte[] _messageOut; // message send to the server
+	byte[] _messageIn; // capitalized message read from the server
 	String _hostName;
 	int _portNum;
+	int _serverId;
 
-	public Client(String host, int portNum, peerProcess parent) {
+	public Client(String host, int portNum, int serverId, peerProcess parent) {
 		_peerProcess = parent;
 		_hostName = host;
 		_portNum = portNum;
-		
+		_serverId = serverId;
 	}
 
 	public void run() {
@@ -27,27 +28,22 @@ public class Client implements Runnable{
 			_out.flush();
 			_in = new ObjectInputStream(_requestSocket.getInputStream());
 
-			// get Input from standard input
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+			// Send Handshake Message
+			sendMessage(Message.getHandshakeMsg(_peerProcess._peerId));
+			System.out.println("LOG: Peer " + _peerProcess._peerId + " makes a connection to " + _serverId);
+
 			while (true) {
-				System.out.print("Hello, please input a sentence: ");
-				// read a sentence from the standard input
-				message = bufferedReader.readLine();
-				// Send the sentence to the server
-				sendMessage(message);
-				// Receive the upperCase sentence from the server
-				MESSAGE = (String) _in.readObject();
-				// show the message to the user
-				System.out.println("Receive message: " + MESSAGE);
+				// Loop
 			}
+
 		} catch (ConnectException e) {
 			System.err.println("Connection refused. You need to initiate a server first.");
-		} catch (ClassNotFoundException e) {
-			System.err.println("Class not found");
 		} catch (UnknownHostException unknownHost) {
 			System.err.println("You are trying to connect to an unknown host!");
 		} catch (IOException ioException) {
 			ioException.printStackTrace();
+		} catch (Exception e) {
+			System.err.println(e);
 		} finally {
 			// Close connections
 			try {
@@ -61,11 +57,13 @@ public class Client implements Runnable{
 	}
 
 	// send a message to the output stream
-	void sendMessage(String msg) {
+	void sendMessage(byte[] msg) {
 		try {
 			// stream write the message
-			_out.writeObject(msg);
-			_out.flush();
+			synchronized (_out) {
+				_out.writeObject(msg);
+				_out.flush();
+			}
 		} catch (IOException ioException) {
 			ioException.printStackTrace();
 		}
