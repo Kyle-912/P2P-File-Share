@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class Client implements Runnable {
+public class Client extends Thread {
 	peerProcess _peerProcess; // ParentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
 	Socket _requestSocket; // Socket connected to the server
 	ObjectOutputStream _out; // Stream written to the socket
@@ -17,18 +17,19 @@ public class Client implements Runnable {
 		_hostName = host;
 		_portNum = portNum;
 		_serverId = serverId;
-	}
 
-	public void run() {
 		try {
-			// Create a socket to connect to the server
 			_requestSocket = new Socket(_hostName, _portNum);
 			// Initialize input and output streams
 			_out = new ObjectOutputStream(_requestSocket.getOutputStream());
 			_out.flush();
 			_in = new ObjectInputStream(_requestSocket.getInputStream());
+		} catch (Exception e){
+			System.out.println("Error setting up input and output streams");
+		}
 
-			// Send handshake message
+		//send handshake message
+		try{
 			sendMessage(Message.getHandshakeMsg(_peerProcess._peerId));
 
 			// Log connection
@@ -38,7 +39,17 @@ public class Client implements Runnable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+		} catch (Exception e){
+			System.out.println("Error sending handshake message");
+		}
+	}
 
+	public void run() {
+		try {
+			System.out.println("NowRunnnig" + _serverId);
+			//used to get the catch to shut up for now DELETE LATER
+			_out.flush();
 			while (true) {
 				// Loop
 			}
