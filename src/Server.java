@@ -1,4 +1,5 @@
 import java.net.*;
+import java.nio.ByteBuffer;
 import java.io.*;
 
 public class Server implements Runnable {
@@ -89,7 +90,22 @@ public class Server implements Runnable {
 				_out.flush();
 				System.out.println("NowRunnnig" + _clientId);
 				while (true) {
-					// Loop
+					// get message from socket
+					Message currMsg = receiveMessage();
+
+					// pass to peer and store response message
+					Message respMsg = null;
+					try {
+						respMsg = _peerProcess.handleMessage(_clientId, currMsg);
+					}
+					catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+		
+					// send response message if applicable
+					if (respMsg != null) {
+						sendMessage(respMsg.getMessageBytes());
+					}
 				}
 
 			} catch (Exception e) {
@@ -129,6 +145,20 @@ public class Server implements Runnable {
 				System.out.println("Error receiving message in server thread.");
 				return null;
 			}
+		}
+
+		//USE THESE FROM PEERPROCESS WHEN CHANGING PREFFERED PEERS AND OPTIMISTICALLY UNCHOKING NEIGHBORS
+		public void sendHaveMessage(int pieceNum) {
+			sendMessage(new Message(Message.TYPES.HAVE, ByteBuffer.allocate(4).putInt(pieceNum).array()).getMessageBytes());
+		}
+
+
+		public void unchoke() {
+			sendMessage(new Message(Message.TYPES.UNCHOKE, null).getMessageBytes());
+		}
+	
+		public void choke() {
+			sendMessage(new Message(Message.TYPES.CHOKE, null).getMessageBytes());  
 		}
 	}
 }

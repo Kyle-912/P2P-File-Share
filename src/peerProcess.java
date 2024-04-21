@@ -41,6 +41,9 @@ public class peerProcess {
         readPeerInfoConfig();
         startServer();
         connectToPeers();
+        //NEED TO DO
+        //CREATE SCHEDULER AND AT GIVEN INTERVALS RECOMPUTE PREFERRED PEERS AND OPTIMISTICALLY UNCHOKED PEER
+
     }
 
     private void readCommonConfig() {
@@ -123,5 +126,43 @@ public class peerProcess {
         _clients.put(i, client);
         Thread clientThread = new Thread(client);
         clientThread.start();
+    }
+
+    //NEED TO DO
+    public synchronized Message handleMessage(Integer peerId, Message message) throws IOException{
+        // Handle message
+        Message response = null;
+
+        switch(message.getTypeName()){
+            case CHOKE:
+                break;
+            case UNCHOKE:
+                break;
+            case INTERESTED:
+                break;
+            case NOT_INTERESTED:
+                break;
+            case HAVE:
+                break;
+            case BITFIELD:
+                break;
+            case REQUEST:
+                break;
+            case PIECE:
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    //NEED TO DO
+    public synchronized void updatePreferredPeers() {
+
+    } 
+
+    //NEED TO DO
+    public synchronized void updateOptimisticallyUnchokedPeer() {
+
     }
 }

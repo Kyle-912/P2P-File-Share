@@ -55,7 +55,22 @@ public class Client extends Thread {
 			//used to get the catch to shut up for now DELETE LATER
 			_out.flush();
 			while (true) {
-				// Loop
+				// get message from socket
+				Message currMsg = receiveMessage();
+
+				// pass to peer and store response message
+				Message respMsg = null;
+				try {
+					respMsg = _peerProcess.handleMessage(_serverId, currMsg);
+				}
+				catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+	
+				// send response message if applicable
+				if (respMsg != null) {
+					sendMessage(respMsg.getMessageBytes());
+				}
 			}
 
 		} catch (ConnectException e) {
@@ -102,5 +117,9 @@ public class Client extends Thread {
             System.out.println("Error receiving message in server thread.");
             return null;
         }
+    }
+	//send to client NOTINTERESTED message, called from peerProcess
+	public void sendNotIntMessage() {
+        sendMessage(new Message(Message.TYPES.NOT_INTERESTED, null).getMessageBytes());
     }
 }
