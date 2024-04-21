@@ -38,7 +38,7 @@ public class peerProcess {
 
     public peerProcess(int peerId) throws Exception {
         this._peerId = peerId;
-        log.setLogPid(peerId);
+        log.createLog(peerId);
         readCommonConfig();
         readPeerInfoConfig();
         startServer();

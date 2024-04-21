@@ -61,7 +61,7 @@ public class Server implements Runnable {
 					// Log connection
 					System.out.println("LOG: Peer " + _peerProcess._peerId + " is connected from Peer " + _clientId);
 					try {
-						_peerProcess.log.LogTCPTo(_clientId);
+						_peerProcess.log.LogTCPFrom(_clientId);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

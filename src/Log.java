@@ -23,14 +23,13 @@ public class Log {
 	private int _pid;
 	private int _numPieces;
 
-	public Log() throws IOException {
+	public Log() {}
+
+	public void createLog(int PeerID) throws IOException {
+		_pid = PeerID;
 		_peerLog = new File("log_peer_" + _pid + ".log");
 		_peerLog.createNewFile();
 		_writer = new FileWriter(_peerLog, false);
-	}
-
-	public void setLogPid(int PeerID) {
-		_pid = PeerID;
 	}
 
 	// Log Messages :
