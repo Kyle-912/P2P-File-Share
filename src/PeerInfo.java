@@ -1,5 +1,4 @@
 public class PeerInfo {
-
     public int _pid, _listenerPort;
     public String _hostname;
     public boolean _hasFile;
@@ -10,5 +9,4 @@ public class PeerInfo {
         _hostname = hostname;
         _hasFile = Boolean.parseBoolean(hasFile);
     }
-
 }
