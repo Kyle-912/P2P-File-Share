@@ -28,9 +28,13 @@ public class Client extends Thread {
 			System.out.println("Error setting up input and output streams");
 		}
 
-		//send handshake message
 		try{
+			// Send handshake message
 			sendMessage(Message.getHandshakeMsg(_peerProcess._peerId));
+
+			// Receive bitfield from server and set it in peerInfo
+			Message msg = receiveMessage();
+			_peerProcess._peers.get(_serverId)._bitfield = msg._mdata;
 
 			// Log connection
 			System.out.println("LOG: Peer " + _peerProcess._peerId + " makes a connection to " + _serverId);
@@ -86,4 +90,17 @@ public class Client extends Thread {
 			ioException.printStackTrace();
 		}
 	}
+
+	private Message receiveMessage() {
+        try {
+            byte[] msg;
+            synchronized (_in) {
+                msg = (byte[]) _in.readObject();
+            }
+            return new Message(msg);
+        } catch (Exception e) {
+            System.out.println("Error receiving message in server thread.");
+            return null;
+        }
+    }
 }

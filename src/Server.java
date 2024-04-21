@@ -68,16 +68,18 @@ public class Server implements Runnable {
 						e.printStackTrace();
 					}
 
+					// Start connection as client if not already established
 					if (_clientId > _peerProcess._peerId) {
 						_peerProcess.connectToPeer(_clientId);
-						//send bitmap
-						
-						//
 					}
+
+					// Respond to client with server peer's bitfield
+					byte[] msg = new Message(Message.TYPES.BITFIELD, _peerProcess._peers.get(_peerProcess._peerId)._bitfield).getMessageBytes();
+					sendMessage(msg);
+
 			} catch (Exception e){
 				System.out.println("Error receiving handshake message");
 			}
-
 
 		}
 
@@ -105,13 +107,27 @@ public class Server implements Runnable {
 		}
 
 		// Send a message to the output stream
-		public void sendMessage(String msg) {
+		public void sendMessage(byte[] msg) {
 			try {
-				_out.writeObject(msg);
-				_out.flush();
-				System.out.println("Send message: " + msg + " to Client " + _clientId);
+				synchronized (_out) {
+					_out.writeObject(msg);
+					_out.flush();
+				}
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
+			}
+		}
+
+		private Message receiveMessage() {
+			try {
+				byte[] msg;
+				synchronized (_in) {
+					msg = (byte[]) _in.readObject();
+				}
+				return new Message(msg);
+			} catch (Exception e) {
+				System.out.println("Error receiving message in server thread.");
+				return null;
 			}
 		}
 	}
