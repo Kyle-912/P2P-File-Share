@@ -6,8 +6,7 @@ public class Server implements Runnable{
 	int _peerId;
 	int _sPort;
 
-	public Server(int peerId, int sPort, peerProcess parent) throws Exception {
-		_peerId = peerId;
+	public Server(int sPort, peerProcess parent) throws Exception {
 		_sPort = sPort;
 		_peerProcess = parent;
 	}
@@ -21,14 +20,10 @@ public class Server implements Runnable{
 	}
 
 	public void start() throws IOException {
-		System.out.println("Peer " + _peerId + "'s server listening on port " + _sPort);
 		ServerSocket listener = new ServerSocket(_sPort);
-		int peerNum = 1001;
 		try {
 			while (true) {
-				new Handler(listener.accept(), peerNum, _peerProcess).start();
-				System.out.println("Client is connected!");
-				peerNum++;
+				new Handler(listener.accept(), _peerProcess).start();
 			}
 		} finally {
 			listener.close();
@@ -41,16 +36,15 @@ public class Server implements Runnable{
 	 */
 	private static class Handler extends Thread {
 		peerProcess _peerProcess; //parentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
-		private String message; // message received from the client
-		private String MESSAGE; // uppercase message send to the client
+		private byte[] _messageIn; // message received from the client
+		//private byte[] _messageOut; // uppercase message send to the client
 		private Socket _connection;
 		private ObjectInputStream _in; // stream read from the socket
 		private ObjectOutputStream _out; // stream write to the socket
 		private int _clientId; // The index number of the client
 
-		public Handler(Socket connection, int clientPeerId, peerProcess parent) {
+		public Handler(Socket connection, peerProcess parent) {
 			_connection = connection;
-			_clientId = clientPeerId;
 			_peerProcess = parent;
 		}
 
@@ -61,18 +55,20 @@ public class Server implements Runnable{
 				_out.flush();
 				_in = new ObjectInputStream(_connection.getInputStream());
 				try {
+					_messageIn = (byte[]) _in.readObject();
+					_clientId = Message.readHandshakeMsg(_messageIn);
+					System.out.println("LOG: Peer " + _peerProcess._peerId + " is connected from Peer " + _clientId);
+					if (_clientId > _peerProcess._peerId) {
+						_peerProcess.connectToPeer(_clientId);
+					}
+
 					while (true) {
-						// receive the message sent from the client
-						message = (String) _in.readObject();
-						// show the message to the user
-						System.out.println("Receive message: " + message + " from client " + _clientId);
-						// Capitalize all letters in the message
-						MESSAGE = message.toUpperCase();
-						// send MESSAGE back to the client
-						sendMessage(MESSAGE);
+						// LOOP
 					}
 				} catch (ClassNotFoundException classnot) {
 					System.err.println("Data received in unknown format");
+				} catch (Exception e) {
+					System.err.println(e);
 				}
 			} catch (IOException ioException) {
 				System.out.println("Disconnect with Client " + _clientId);
