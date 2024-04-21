@@ -126,4 +126,66 @@ public class peerProcess {
         Thread clientThread = new Thread(client);
         clientThread.start();
     }
+
+    public synchronized Message handleMessage(int senderPeerId, byte[] msg) {
+        Message response = null;
+        switch (msg._mtype) { //FIXME: will need a getter to use enum labels
+            case CHOKE:
+                try {
+                    log.LogChoked(_peerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case UNCHOKE:
+                try {
+                    log.LogUnchoked(_peerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case INTERESTED:
+                try {
+                    log.LogReceivedInterested(_peerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case NOT_INTERESTED:
+                try {
+                    log.LogReceivedNotInterested(_peerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case HAVE:
+                try {
+                    log.LogReceivedHave(_peerId, -1); //FIXME: doesn't log proper pieceIndex
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case BITFIELD:
+
+                break;
+
+            case REQUEST:
+
+                break;
+
+            case PIECE:
+
+                break;
+
+            default:
+                break;
+        }
+
+        return response;
+    }
 }
