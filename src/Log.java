@@ -23,7 +23,8 @@ public class Log {
 	private int _pid;
 	private int _numPieces;
 
-	public Log() {}
+	public Log() {
+	}
 
 	public void createLog(int PeerID) throws IOException {
 		_pid = PeerID;
@@ -36,8 +37,6 @@ public class Log {
 
 	// 0. TCP Connection (to)
 	public void LogTCPTo(int peer) throws IOException {
-		// Initializing writer and current time
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " makes a connection to Peer " + peer + ".\n");
@@ -49,7 +48,6 @@ public class Log {
 
 	// 1. TCP Connection (from)
 	public void LogTCPFrom(int peer) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " is connected from Peer " + peer + ".\n");
@@ -61,7 +59,6 @@ public class Log {
 
 	// 2. Neighbor change
 	public void LogChangeNeighbors(ArrayList<Integer> peerList) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " has the preferred neighbors " + peerList.toString() + ".\n");
@@ -73,7 +70,6 @@ public class Log {
 
 	// 3. Optimistically unchoked peer change
 	public void LogOptimisticChange(int peer) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " has the optimistically unchoked neighbor " + peer + ".\n");
@@ -85,7 +81,6 @@ public class Log {
 
 	// 4. Unchoked
 	public void LogUnchoked(int peer) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " is unchoked by " + peer + ".\n");
@@ -97,7 +92,6 @@ public class Log {
 
 	// 5. Choked
 	public void LogChoked(int peer) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " is choked by " + peer + ".\n");
@@ -109,7 +103,6 @@ public class Log {
 
 	// 6. Received "Have"
 	public void LogReceivedHave(int peer, int pieceIndex) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " received the 'have' message from " + peer + " for the piece "
@@ -122,7 +115,6 @@ public class Log {
 
 	// 7. Received "Interested"
 	public void LogReceivedInterested(int peer) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " received the 'interested' message from " + peer + ".\n");
@@ -134,7 +126,6 @@ public class Log {
 
 	// 8. Received "Not Interested"
 	public void LogReceivedNotInterested(int peer) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " received the 'not interested' message from " + peer + ".\n");
@@ -146,7 +137,6 @@ public class Log {
 
 	// 9. Downloaded piece
 	public void LogDownloadedPiece(int peer, int pieceIndex) throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		_numPieces += 1;
 		try {
@@ -160,7 +150,6 @@ public class Log {
 
 	// 10. Completely downloaded
 	public void LogDownloadComplete() throws IOException {
-
 		LocalDateTime now = LocalDateTime.now();
 		try {
 			_writer.write(now + ": Peer " + _pid + " has downloaded the complete file.\n");

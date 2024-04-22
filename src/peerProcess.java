@@ -41,9 +41,7 @@ public class peerProcess {
         readPeerInfoConfig();
         startServer();
         connectToPeers();
-        //NEED TO DO
-        //CREATE SCHEDULER AND AT GIVEN INTERVALS RECOMPUTE PREFERRED PEERS AND OPTIMISTICALLY UNCHOKED PEER
-
+        // TODO: CREATE SCHEDULER AND AT GIVEN INTERVALS RECOMPUTE PREFERRED PEERS AND OPTIMISTICALLY UNCHOKED PEER
     }
 
     private void readCommonConfig() {
@@ -128,12 +126,12 @@ public class peerProcess {
         clientThread.start();
     }
 
-    //NEED TO DO
-    public synchronized Message handleMessage(Integer peerId, Message message) throws IOException{
+    // TODO
+    public synchronized Message handleMessage(Integer peerId, Message message) throws IOException {
         // Handle message
         Message response = null;
 
-        switch(message.getTypeName()){
+        switch (message.getTypeName()) {
             case CHOKE:
                 try {
                     log.LogChoked(_peerId);
@@ -168,7 +166,7 @@ public class peerProcess {
 
             case HAVE:
                 try {
-                    log.LogReceivedHave(_peerId, -1); //FIXME: doesn't log proper pieceIndex
+                    log.LogReceivedHave(_peerId, -1); // FIXME: doesn't log proper pieceIndex
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -189,17 +187,16 @@ public class peerProcess {
             default:
                 break;
         }
-
         return response;
     }
 
-    //NEED TO DO
+    // TODO
     public synchronized void updatePreferredPeers() {
 
-    } 
+    }
 
-    //NEED TO DO
+    // TODO
     public synchronized void updateOptimisticallyUnchokedPeer() {
-      
+
     }
 }
