@@ -135,25 +135,62 @@ public class peerProcess {
 
         switch(message.getTypeName()){
             case CHOKE:
-                break;
-            case UNCHOKE:
-                break;
-            case INTERESTED:
-                break;
-            case NOT_INTERESTED:
-                break;
-            case HAVE:
-                break;
-            case BITFIELD:
-                break;
-            case REQUEST:
-                break;
-            case PIECE:
-                break;
-            default:
+                try {
+                    log.LogChoked(_peerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
 
+            case UNCHOKE:
+                try {
+                    log.LogUnchoked(_peerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case INTERESTED:
+                try {
+                    log.LogReceivedInterested(_peerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case NOT_INTERESTED:
+                try {
+                    log.LogReceivedNotInterested(_peerId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case HAVE:
+                try {
+                    log.LogReceivedHave(_peerId, -1); //FIXME: doesn't log proper pieceIndex
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            case BITFIELD:
+
+                break;
+
+            case REQUEST:
+
+                break;
+
+            case PIECE:
+
+                break;
+
+            default:
+                break;
         }
+
+        return response;
     }
 
     //NEED TO DO
@@ -163,6 +200,6 @@ public class peerProcess {
 
     //NEED TO DO
     public synchronized void updateOptimisticallyUnchokedPeer() {
-
+      
     }
 }
