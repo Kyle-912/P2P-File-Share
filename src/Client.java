@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class Client implements Runnable {
+public class Client extends Thread {
 	peerProcess _peerProcess; // ParentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
 	Socket _requestSocket; // Socket connected to the server
 	ObjectOutputStream _out; // Stream written to the socket
@@ -17,19 +17,24 @@ public class Client implements Runnable {
 		_hostName = host;
 		_portNum = portNum;
 		_serverId = serverId;
-	}
 
-	public void run() {
 		try {
-			// Create a socket to connect to the server
 			_requestSocket = new Socket(_hostName, _portNum);
 			// Initialize input and output streams
 			_out = new ObjectOutputStream(_requestSocket.getOutputStream());
 			_out.flush();
 			_in = new ObjectInputStream(_requestSocket.getInputStream());
+		} catch (Exception e){
+			System.out.println("Error setting up input and output streams");
+		}
 
+		try{
 			// Send handshake message
 			sendMessage(Message.getHandshakeMsg(_peerProcess._peerId));
+
+			// Receive bitfield from server and set it in peerInfo
+			Message msg = receiveMessage();
+			_peerProcess._peers.get(_serverId)._bitfield = msg._mdata;
 
 			// Log connection
 			System.out.println("LOG: Peer " + _peerProcess._peerId + " makes a connection to " + _serverId);
@@ -38,9 +43,34 @@ public class Client implements Runnable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+		} catch (Exception e){
+			System.out.println("Error sending handshake message");
+		}
+	}
 
+	public void run() {
+		try {
+			System.out.println("NowRunnnig" + _serverId);
+			//used to get the catch to shut up for now DELETE LATER
+			_out.flush();
 			while (true) {
-				// Loop
+				// get message from socket
+				Message currMsg = receiveMessage();
+
+				// pass to peer and store response message
+				Message respMsg = null;
+				try {
+					respMsg = _peerProcess.handleMessage(_serverId, currMsg);
+				}
+				catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+	
+				// send response message if applicable
+				if (respMsg != null) {
+					sendMessage(respMsg.getMessageBytes());
+				}
 			}
 
 		} catch (ConnectException e) {
@@ -75,4 +105,21 @@ public class Client implements Runnable {
 			ioException.printStackTrace();
 		}
 	}
+
+	private Message receiveMessage() {
+        try {
+            byte[] msg;
+            synchronized (_in) {
+                msg = (byte[]) _in.readObject();
+            }
+            return new Message(msg);
+        } catch (Exception e) {
+            System.out.println("Error receiving message in server thread.");
+            return null;
+        }
+    }
+	//send to client NOTINTERESTED message, called from peerProcess
+	public void sendNotIntMessage() {
+        sendMessage(new Message(Message.TYPES.NOT_INTERESTED, null).getMessageBytes());
+    }
 }

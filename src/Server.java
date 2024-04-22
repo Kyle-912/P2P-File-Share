@@ -1,4 +1,5 @@
 import java.net.*;
+import java.nio.ByteBuffer;
 import java.io.*;
 
 public class Server implements Runnable {
@@ -46,16 +47,18 @@ public class Server implements Runnable {
 		public Handler(Socket connection, peerProcess parent) {
 			_connection = connection;
 			_peerProcess = parent;
-		}
-
-		public void run() {
-			try {
-				// Initialize input and output streams
+			// Initialize input and output streams
+			try{
 				_out = new ObjectOutputStream(_connection.getOutputStream());
 				_out.flush();
 				_in = new ObjectInputStream(_connection.getInputStream());
-				try {
-					_messageIn = (byte[]) _in.readObject();
+			} catch (Exception e){
+				System.out.println("Error setting up input and output streams");
+			}
+
+			// Handshake from client
+			try{
+				_messageIn = (byte[]) _in.readObject();
 					_clientId = Message.readHandshakeMsg(_messageIn);
 
 					// Log connection
@@ -66,21 +69,47 @@ public class Server implements Runnable {
 						e.printStackTrace();
 					}
 
+					// Start connection as client if not already established
 					if (_clientId > _peerProcess._peerId) {
 						_peerProcess.connectToPeer(_clientId);
 					}
 
-					while (true) {
-						// Loop
-					}
+					// Respond to client with server peer's bitfield
+					byte[] msg = new Message(Message.TYPES.BITFIELD, _peerProcess._peers.get(_peerProcess._peerId)._bitfield).getMessageBytes();
+					sendMessage(msg);
 
-				} catch (ClassNotFoundException classnot) {
-					System.err.println("Data received in unknown format");
-				} catch (Exception e) {
-					System.err.println(e);
+			} catch (Exception e){
+				System.out.println("Error receiving handshake message");
+			}
+
+		}
+
+		public void run() {
+			try {
+				//used to get the catch to shut up for now DELETE LATER
+				_out.flush();
+				System.out.println("NowRunnnig" + _clientId);
+				while (true) {
+					// get message from socket
+					Message currMsg = receiveMessage();
+
+					// pass to peer and store response message
+					Message respMsg = null;
+					try {
+						respMsg = _peerProcess.handleMessage(_clientId, currMsg);
+					}
+					catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+		
+					// send response message if applicable
+					if (respMsg != null) {
+						sendMessage(respMsg.getMessageBytes());
+					}
 				}
-			} catch (IOException ioException) {
-				System.out.println("Disconnect with Client " + _clientId);
+
+			} catch (Exception e) {
+				System.err.println(e);
 			} finally {
 				// Close connections
 				try {
@@ -94,14 +123,42 @@ public class Server implements Runnable {
 		}
 
 		// Send a message to the output stream
-		public void sendMessage(String msg) {
+		public void sendMessage(byte[] msg) {
 			try {
-				_out.writeObject(msg);
-				_out.flush();
-				System.out.println("Send message: " + msg + " to Client " + _clientId);
+				synchronized (_out) {
+					_out.writeObject(msg);
+					_out.flush();
+				}
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
 			}
+		}
+
+		private Message receiveMessage() {
+			try {
+				byte[] msg;
+				synchronized (_in) {
+					msg = (byte[]) _in.readObject();
+				}
+				return new Message(msg);
+			} catch (Exception e) {
+				System.out.println("Error receiving message in server thread.");
+				return null;
+			}
+		}
+
+		//USE THESE FROM PEERPROCESS WHEN CHANGING PREFFERED PEERS AND OPTIMISTICALLY UNCHOKING NEIGHBORS
+		public void sendHaveMessage(int pieceNum) {
+			sendMessage(new Message(Message.TYPES.HAVE, ByteBuffer.allocate(4).putInt(pieceNum).array()).getMessageBytes());
+		}
+
+
+		public void unchoke() {
+			sendMessage(new Message(Message.TYPES.UNCHOKE, null).getMessageBytes());
+		}
+	
+		public void choke() {
+			sendMessage(new Message(Message.TYPES.CHOKE, null).getMessageBytes());  
 		}
 	}
 }

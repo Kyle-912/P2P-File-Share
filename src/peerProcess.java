@@ -21,8 +21,6 @@ public class peerProcess {
     // Member Variables
     int _peerId;
     Integer _optimisticallyUnchokedPeerId;
-    byte[] _bitfield;
-    ConcurrentHashMap<Integer, byte[]> _peerBitFields = new ConcurrentHashMap<>(); // Key: Peer ID, Value: Bitfield
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
     ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
@@ -43,6 +41,9 @@ public class peerProcess {
         readPeerInfoConfig();
         startServer();
         connectToPeers();
+        //NEED TO DO
+        //CREATE SCHEDULER AND AT GIVEN INTERVALS RECOMPUTE PREFERRED PEERS AND OPTIMISTICALLY UNCHOKED PEER
+
     }
 
     private void readCommonConfig() {
@@ -98,7 +99,7 @@ public class peerProcess {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
                 if (parts.length == 4) {
-                    PeerInfo pInfo = new PeerInfo(parts[0], parts[1], parts[2], parts[3]);
+                    PeerInfo pInfo = new PeerInfo(parts[0], parts[1], parts[2], parts[3], _numPieces);
                     _peers.put(pInfo._pid, pInfo);
                 }
             }
@@ -127,9 +128,12 @@ public class peerProcess {
         clientThread.start();
     }
 
-    public synchronized Message handleMessage(int senderPeerId, byte[] msg) {
+    //NEED TO DO
+    public synchronized Message handleMessage(Integer peerId, Message message) throws IOException{
+        // Handle message
         Message response = null;
-        switch (msg._mtype) { //FIXME: will need a getter to use enum labels
+
+        switch(message.getTypeName()){
             case CHOKE:
                 try {
                     log.LogChoked(_peerId);
@@ -187,5 +191,15 @@ public class peerProcess {
         }
 
         return response;
+    }
+
+    //NEED TO DO
+    public synchronized void updatePreferredPeers() {
+
+    } 
+
+    //NEED TO DO
+    public synchronized void updateOptimisticallyUnchokedPeer() {
+      
     }
 }
