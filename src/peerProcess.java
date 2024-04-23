@@ -1,8 +1,7 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.stream.*;
 
 public class peerProcess {
     // File locations
@@ -20,14 +19,18 @@ public class peerProcess {
 
     // Member Variables
     int _peerId;
+    PeerInfo _pInfo = new PeerInfo();
     Integer _optimisticallyUnchokedPeerId;
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
     ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
     Server _server;
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
+    ConcurrentHashMap<Integer, Server.Handler> _servers = new ConcurrentHashMap<>();
     ConcurrentHashMap<Integer, PeerInfo> _peers = new ConcurrentHashMap<>();
-    Log log = new Log();
+    ConcurrentHashMap<Integer, Integer> _downloadRates = new ConcurrentHashMap<>(); // Tracks download rates for peers
+    Log _log = new Log();
+    ScheduledExecutorService _scheduler = Executors.newScheduledThreadPool(2);
 
     public static void main(String args[]) throws Exception {
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
@@ -36,12 +39,15 @@ public class peerProcess {
 
     public peerProcess(int peerId) throws Exception {
         _peerId = peerId;
-        log.createLog(peerId);
+        _log.createLog(peerId);
         readCommonConfig();
         readPeerInfoConfig();
         startServer();
         connectToPeers();
         // TODO: CREATE SCHEDULER AND AT GIVEN INTERVALS RECOMPUTE PREFERRED PEERS AND OPTIMISTICALLY UNCHOKED PEER
+        _scheduler.scheduleAtFixedRate(this::updatePreferredPeers, 0, _unchokingInterval, TimeUnit.SECONDS);
+        _scheduler.scheduleAtFixedRate(this::updateOptimisticallyUnchokedPeer, 1, _optimisticUnchokingInterval,
+                TimeUnit.SECONDS);
     }
 
     private void readCommonConfig() {
@@ -97,8 +103,8 @@ public class peerProcess {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
                 if (parts.length == 4) {
-                    PeerInfo pInfo = new PeerInfo(parts[0], parts[1], parts[2], parts[3], _numPieces);
-                    _peers.put(pInfo._pid, pInfo);
+                    _pInfo.setInfo(parts[0], parts[1], parts[2], parts[3], _numPieces);
+                    _peers.put(_pInfo._pid, _pInfo);
                 }
             }
         } catch (IOException e) {
@@ -126,7 +132,94 @@ public class peerProcess {
         clientThread.start();
     }
 
-    // TODO
+    // TODO:
+    public synchronized void updatePreferredPeers() {
+        ArrayList<Integer> oldPreferredPeerIds = new ArrayList<>(_preferredPeerIds);
+        if (!_pInfo._hasFile) {
+            _preferredPeerIds = new ArrayList<Integer>(_downloadRates.entrySet().stream()
+                    .filter(entry -> _interestedPeerIds.contains(entry.getKey())).sorted((e1, e2) -> {
+                        int valueCompare = e2.getValue().compareTo(e1.getValue());
+                        if (valueCompare == 0) {
+                            Random random = new Random();
+                            return random.nextBoolean() ? 1 : -1;
+                        }
+                        return valueCompare;
+                    }).limit(_numPreferredNeighbors).map(Map.Entry::getKey).collect(Collectors.toList()));
+        } else {
+            _preferredPeerIds = new ArrayList<Integer>(_downloadRates.entrySet().stream()
+                    .filter(entry -> _interestedPeerIds.contains(entry.getKey())).sorted((e1, e2) -> {
+                        Random random = new Random();
+                        return random.nextBoolean() ? 1 : -1;
+                    }).limit(_numPreferredNeighbors).map(Map.Entry::getKey).collect(Collectors.toList()));
+        }
+
+        // Find peers to unchoke
+        ArrayList<Integer> toChoke = new ArrayList<>(oldPreferredPeerIds);
+        toChoke.removeAll(_preferredPeerIds);
+        toChoke.remove((Integer) _optimisticallyUnchokedPeerId);
+
+        // Find peers to choke
+        ArrayList<Integer> toUnchoke = new ArrayList<>(_preferredPeerIds);
+        toUnchoke.removeAll(oldPreferredPeerIds);
+        toUnchoke.remove((Integer) _optimisticallyUnchokedPeerId);
+
+        // Do the changes
+        _servers.forEach((key, value) -> {
+            if (toUnchoke.contains(key)) {
+                value.unchoke();
+                System.out.println("Unchoked " + key + " due to updatePreferredPeers");
+            } else if (toChoke.contains(key)) {
+                value.choke();
+                System.out.println("Choked " + key + " due to updatePreferredPeers");
+            }
+        });
+
+        for (Integer otherPeerID : _downloadRates.keySet()) {
+            _downloadRates.replace(otherPeerID, 0);
+        }
+
+        try {
+            _log.LogChangeNeighbors(_preferredPeerIds);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // TODO:
+    public synchronized void updateOptimisticallyUnchokedPeer() {
+        ArrayList<Integer> optimisticallyUnchokedCandidates = new ArrayList<>(_interestedPeerIds);
+        optimisticallyUnchokedCandidates.removeAll(_preferredPeerIds);
+        optimisticallyUnchokedCandidates.remove(_optimisticallyUnchokedPeerId);
+
+        if (!optimisticallyUnchokedCandidates.isEmpty()) {
+            Random random = new Random();
+            Integer newOptimisticallyUnchokedPeerId = optimisticallyUnchokedCandidates
+                    .get(random.nextInt(optimisticallyUnchokedCandidates.size()));
+
+            _servers.forEach((key, value) -> {
+                if (key.equals(_optimisticallyUnchokedPeerId)
+                        && !_preferredPeerIds.contains(_optimisticallyUnchokedPeerId)) {
+                    value.choke();
+                    System.out.println("Choked " + key + " due to updateOptimisticallyUnchokedPeer");
+                } else if (key.equals(newOptimisticallyUnchokedPeerId)) {
+                    value.unchoke();
+                    System.out.println("Unchoked " + key + " due to updateOptimisticallyUnchokedPeer");
+                }
+            });
+
+            _optimisticallyUnchokedPeerId = newOptimisticallyUnchokedPeerId;
+
+            try {
+                _log.LogOptimisticChange(newOptimisticallyUnchokedPeerId);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Optimistically unchoked candidate list is empty.");
+        }
+    }
+
+    // TODO:
     public synchronized Message handleMessage(Integer peerId, Message message) throws IOException {
         // Handle message
         Message responseMessage = null;
@@ -134,7 +227,7 @@ public class peerProcess {
         switch (message.getTypeName()) {
             case CHOKE:
                 try {
-                    log.LogChoked(_peerId);
+                    _log.LogChoked(_peerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -142,7 +235,7 @@ public class peerProcess {
 
             case UNCHOKE:
                 try {
-                    log.LogUnchoked(_peerId);
+                    _log.LogUnchoked(_peerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -150,7 +243,7 @@ public class peerProcess {
 
             case INTERESTED:
                 try {
-                    log.LogReceivedInterested(_peerId);
+                    _log.LogReceivedInterested(_peerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -158,7 +251,7 @@ public class peerProcess {
 
             case NOT_INTERESTED:
                 try {
-                    log.LogReceivedNotInterested(_peerId);
+                    _log.LogReceivedNotInterested(_peerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -166,7 +259,7 @@ public class peerProcess {
 
             case HAVE:
                 try {
-                    log.LogReceivedHave(_peerId, -1); // FIXME: doesn't log proper pieceIndex
+                    _log.LogReceivedHave(_peerId, -1); // FIXME: doesn't log proper pieceIndex
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -188,15 +281,5 @@ public class peerProcess {
                 break;
         }
         return responseMessage;
-    }
-
-    // TODO
-    public synchronized void updatePreferredPeers() {
-        System.out.println("Updating preferred peers");
-    }
-
-    // TODO
-    public synchronized void updateOptimisticallyUnchokedPeer() {
-        System.out.println("Updating optimistically unchoked peer");
     }
 }

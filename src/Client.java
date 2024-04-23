@@ -39,7 +39,7 @@ public class Client extends Thread {
 			// Log connection
 			System.out.println("LOG: Peer " + _peerProcess._peerId + " makes a connection to " + _serverId);
 			try {
-				_peerProcess.log.LogTCPTo(_serverId);
+				_peerProcess._log.LogTCPTo(_serverId);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
