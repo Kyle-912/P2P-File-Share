@@ -231,6 +231,7 @@ public class peerProcess {
                     responseMessage = new Message(Message.TYPES.NOT_INTERESTED, null);
                 }
                 break;
+
             case CHOKE:
                 // Remove all requests from connected peer
                 // TODO: Implement removePendingRequests()
