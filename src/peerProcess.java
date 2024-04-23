@@ -126,7 +126,7 @@ public class peerProcess {
         clientThread.start();
     }
 
-    // TODO
+    // TODO:
     public synchronized Message handleMessage(Integer peerId, Message message) throws IOException {
         // Handle message
         Message response = null;
@@ -190,12 +190,12 @@ public class peerProcess {
         return response;
     }
 
-    // TODO
+    // TODO:
     public synchronized void updatePreferredPeers() {
 
     }
 
-    // TODO
+    // TODO:
     public synchronized void updateOptimisticallyUnchokedPeer() {
 
     }
