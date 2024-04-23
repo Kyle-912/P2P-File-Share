@@ -343,11 +343,10 @@ public class peerProcess {
                 break;
 
             case REQUEST:
-                // FIXME: Verify other peer is unchoked
-                //if (!_preferredPeerIds.contains(otherPeerId) && !(_optimisticallyUnchokedPeerId == otherPeerId)) {
-                //    System.out.println("Blocked request from " + otherPeerId);
-                //    break;
-                //}
+                if (!_preferredPeerIds.contains(otherPeerId) && !(_optimisticallyUnchokedPeerId == otherPeerId)) {
+                    System.out.println("Blocked request from " + otherPeerId);
+                    break;
+                }
 
                 // Load piece from _fileBytes
                 int pieceNum = ByteBuffer.wrap(message._mdata).getInt();

@@ -1,2 +1,148 @@
-2024-04-23T19:34:00.053517400: Peer 1001 has the preferred neighbors [].
-2024-04-23T19:34:05.031218200: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:43:55.300072600: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:00.220087900: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:04.852202: Peer 1001 is connected from Peer 1002.
+2024-04-23T19:44:04.936263: Peer 1001 makes a connection to Peer 1002.
+2024-04-23T19:44:04.954286600: Peer 1001 received the 'interested' message from 1002.
+2024-04-23T19:44:05.215044800: Peer 1001 has the preferred neighbors [1002].
+2024-04-23T19:44:05.218044900: Peer 1001 received the 'have' message from 1002 for the piece 41.
+2024-04-23T19:44:05.232322300: Peer 1001 received the 'have' message from 1002 for the piece 74.
+2024-04-23T19:44:05.235327300: Peer 1001 received the 'have' message from 1002 for the piece 75.
+2024-04-23T19:44:05.239840100: Peer 1001 received the 'have' message from 1002 for the piece 1.
+2024-04-23T19:44:05.242855700: Peer 1001 received the 'have' message from 1002 for the piece 21.
+2024-04-23T19:44:05.250379200: Peer 1001 received the 'have' message from 1002 for the piece 114.
+2024-04-23T19:44:05.252378300: Peer 1001 received the 'have' message from 1002 for the piece 124.
+2024-04-23T19:44:05.256383800: Peer 1001 received the 'have' message from 1002 for the piece 76.
+2024-04-23T19:44:05.260956300: Peer 1001 received the 'have' message from 1002 for the piece 61.
+2024-04-23T19:44:05.265957200: Peer 1001 received the 'have' message from 1002 for the piece 52.
+2024-04-23T19:44:05.268459200: Peer 1001 received the 'have' message from 1002 for the piece 106.
+2024-04-23T19:44:05.272478300: Peer 1001 received the 'have' message from 1002 for the piece 95.
+2024-04-23T19:44:05.275482900: Peer 1001 received the 'have' message from 1002 for the piece 129.
+2024-04-23T19:44:05.280019500: Peer 1001 received the 'have' message from 1002 for the piece 68.
+2024-04-23T19:44:05.284036200: Peer 1001 received the 'have' message from 1002 for the piece 111.
+2024-04-23T19:44:05.288541100: Peer 1001 received the 'have' message from 1002 for the piece 55.
+2024-04-23T19:44:05.292569600: Peer 1001 received the 'have' message from 1002 for the piece 36.
+2024-04-23T19:44:05.298234500: Peer 1001 received the 'have' message from 1002 for the piece 70.
+2024-04-23T19:44:05.304166700: Peer 1001 received the 'have' message from 1002 for the piece 40.
+2024-04-23T19:44:05.308174100: Peer 1001 received the 'have' message from 1002 for the piece 78.
+2024-04-23T19:44:05.312735: Peer 1001 received the 'have' message from 1002 for the piece 86.
+2024-04-23T19:44:05.316712500: Peer 1001 received the 'have' message from 1002 for the piece 19.
+2024-04-23T19:44:05.320239500: Peer 1001 received the 'have' message from 1002 for the piece 90.
+2024-04-23T19:44:05.324239300: Peer 1001 received the 'have' message from 1002 for the piece 80.
+2024-04-23T19:44:05.327253300: Peer 1001 received the 'have' message from 1002 for the piece 104.
+2024-04-23T19:44:05.332788300: Peer 1001 received the 'have' message from 1002 for the piece 117.
+2024-04-23T19:44:05.338300900: Peer 1001 received the 'have' message from 1002 for the piece 14.
+2024-04-23T19:44:05.342330700: Peer 1001 received the 'have' message from 1002 for the piece 57.
+2024-04-23T19:44:05.348332900: Peer 1001 received the 'have' message from 1002 for the piece 51.
+2024-04-23T19:44:05.350865800: Peer 1001 received the 'have' message from 1002 for the piece 31.
+2024-04-23T19:44:05.352869: Peer 1001 received the 'have' message from 1002 for the piece 63.
+2024-04-23T19:44:05.356869500: Peer 1001 received the 'have' message from 1002 for the piece 102.
+2024-04-23T19:44:05.360406600: Peer 1001 received the 'have' message from 1002 for the piece 77.
+2024-04-23T19:44:05.366429200: Peer 1001 received the 'have' message from 1002 for the piece 79.
+2024-04-23T19:44:05.372619800: Peer 1001 received the 'have' message from 1002 for the piece 56.
+2024-04-23T19:44:05.376623400: Peer 1001 received the 'have' message from 1002 for the piece 116.
+2024-04-23T19:44:05.382173900: Peer 1001 received the 'have' message from 1002 for the piece 60.
+2024-04-23T19:44:05.385172: Peer 1001 received the 'have' message from 1002 for the piece 92.
+2024-04-23T19:44:05.387174100: Peer 1001 received the 'have' message from 1002 for the piece 113.
+2024-04-23T19:44:05.391598200: Peer 1001 received the 'have' message from 1002 for the piece 6.
+2024-04-23T19:44:05.395578: Peer 1001 received the 'have' message from 1002 for the piece 7.
+2024-04-23T19:44:05.402156300: Peer 1001 received the 'have' message from 1002 for the piece 5.
+2024-04-23T19:44:05.405163200: Peer 1001 received the 'have' message from 1002 for the piece 42.
+2024-04-23T19:44:05.409680700: Peer 1001 received the 'have' message from 1002 for the piece 73.
+2024-04-23T19:44:05.415695700: Peer 1001 received the 'have' message from 1002 for the piece 103.
+2024-04-23T19:44:05.421241800: Peer 1001 received the 'have' message from 1002 for the piece 122.
+2024-04-23T19:44:05.426257600: Peer 1001 received the 'have' message from 1002 for the piece 12.
+2024-04-23T19:44:05.431701100: Peer 1001 received the 'have' message from 1002 for the piece 66.
+2024-04-23T19:44:05.436704600: Peer 1001 received the 'have' message from 1002 for the piece 99.
+2024-04-23T19:44:05.440228300: Peer 1001 received the 'have' message from 1002 for the piece 20.
+2024-04-23T19:44:05.446242500: Peer 1001 received the 'have' message from 1002 for the piece 2.
+2024-04-23T19:44:05.450751500: Peer 1001 received the 'have' message from 1002 for the piece 59.
+2024-04-23T19:44:05.453753800: Peer 1001 received the 'have' message from 1002 for the piece 34.
+2024-04-23T19:44:05.456758800: Peer 1001 received the 'have' message from 1002 for the piece 127.
+2024-04-23T19:44:05.461300900: Peer 1001 received the 'have' message from 1002 for the piece 121.
+2024-04-23T19:44:05.465305300: Peer 1001 received the 'have' message from 1002 for the piece 24.
+2024-04-23T19:44:05.469834900: Peer 1001 received the 'have' message from 1002 for the piece 128.
+2024-04-23T19:44:05.474835700: Peer 1001 received the 'have' message from 1002 for the piece 108.
+2024-04-23T19:44:05.480391400: Peer 1001 received the 'have' message from 1002 for the piece 45.
+2024-04-23T19:44:05.484405700: Peer 1001 received the 'have' message from 1002 for the piece 89.
+2024-04-23T19:44:05.488406900: Peer 1001 received the 'have' message from 1002 for the piece 84.
+2024-04-23T19:44:05.493605900: Peer 1001 received the 'have' message from 1002 for the piece 47.
+2024-04-23T19:44:05.499151900: Peer 1001 received the 'have' message from 1002 for the piece 49.
+2024-04-23T19:44:05.503157500: Peer 1001 received the 'have' message from 1002 for the piece 11.
+2024-04-23T19:44:05.506162500: Peer 1001 received the 'have' message from 1002 for the piece 100.
+2024-04-23T19:44:05.509684400: Peer 1001 received the 'have' message from 1002 for the piece 13.
+2024-04-23T19:44:05.512696600: Peer 1001 received the 'have' message from 1002 for the piece 27.
+2024-04-23T19:44:05.514694700: Peer 1001 received the 'have' message from 1002 for the piece 54.
+2024-04-23T19:44:05.516699800: Peer 1001 received the 'have' message from 1002 for the piece 115.
+2024-04-23T19:44:05.520225800: Peer 1001 received the 'have' message from 1002 for the piece 22.
+2024-04-23T19:44:05.523251200: Peer 1001 received the 'have' message from 1002 for the piece 110.
+2024-04-23T19:44:05.527229300: Peer 1001 received the 'have' message from 1002 for the piece 48.
+2024-04-23T19:44:05.529803200: Peer 1001 received the 'have' message from 1002 for the piece 87.
+2024-04-23T19:44:05.532799500: Peer 1001 received the 'have' message from 1002 for the piece 101.
+2024-04-23T19:44:05.535804200: Peer 1001 received the 'have' message from 1002 for the piece 120.
+2024-04-23T19:44:05.540343200: Peer 1001 received the 'have' message from 1002 for the piece 25.
+2024-04-23T19:44:05.543354700: Peer 1001 received the 'have' message from 1002 for the piece 118.
+2024-04-23T19:44:05.548333900: Peer 1001 received the 'have' message from 1002 for the piece 15.
+2024-04-23T19:44:05.550512: Peer 1001 received the 'have' message from 1002 for the piece 82.
+2024-04-23T19:44:05.552510100: Peer 1001 received the 'have' message from 1002 for the piece 85.
+2024-04-23T19:44:05.554513700: Peer 1001 received the 'have' message from 1002 for the piece 83.
+2024-04-23T19:44:05.559091100: Peer 1001 received the 'have' message from 1002 for the piece 130.
+2024-04-23T19:44:05.563094700: Peer 1001 received the 'have' message from 1002 for the piece 88.
+2024-04-23T19:44:05.567087200: Peer 1001 received the 'have' message from 1002 for the piece 71.
+2024-04-23T19:44:05.570626300: Peer 1001 received the 'have' message from 1002 for the piece 33.
+2024-04-23T19:44:05.573634: Peer 1001 received the 'have' message from 1002 for the piece 0.
+2024-04-23T19:44:05.575660: Peer 1001 received the 'have' message from 1002 for the piece 8.
+2024-04-23T19:44:05.580228300: Peer 1001 received the 'have' message from 1002 for the piece 97.
+2024-04-23T19:44:05.583229200: Peer 1001 received the 'have' message from 1002 for the piece 119.
+2024-04-23T19:44:05.585228700: Peer 1001 received the 'have' message from 1002 for the piece 38.
+2024-04-23T19:44:05.588228700: Peer 1001 received the 'have' message from 1002 for the piece 29.
+2024-04-23T19:44:05.592770900: Peer 1001 received the 'have' message from 1002 for the piece 94.
+2024-04-23T19:44:05.595770600: Peer 1001 received the 'have' message from 1002 for the piece 50.
+2024-04-23T19:44:05.600337600: Peer 1001 received the 'have' message from 1002 for the piece 93.
+2024-04-23T19:44:05.603332200: Peer 1001 received the 'have' message from 1002 for the piece 105.
+2024-04-23T19:44:05.606333800: Peer 1001 received the 'have' message from 1002 for the piece 18.
+2024-04-23T19:44:05.608335400: Peer 1001 received the 'have' message from 1002 for the piece 72.
+2024-04-23T19:44:05.611861600: Peer 1001 received the 'have' message from 1002 for the piece 123.
+2024-04-23T19:44:05.614859700: Peer 1001 received the 'have' message from 1002 for the piece 9.
+2024-04-23T19:44:05.616860500: Peer 1001 received the 'have' message from 1002 for the piece 81.
+2024-04-23T19:44:05.620394900: Peer 1001 received the 'have' message from 1002 for the piece 62.
+2024-04-23T19:44:05.623436400: Peer 1001 received the 'have' message from 1002 for the piece 4.
+2024-04-23T19:44:05.627394100: Peer 1001 received the 'have' message from 1002 for the piece 112.
+2024-04-23T19:44:05.630967800: Peer 1001 received the 'have' message from 1002 for the piece 96.
+2024-04-23T19:44:05.633964300: Peer 1001 received the 'have' message from 1002 for the piece 39.
+2024-04-23T19:44:05.636963700: Peer 1001 received the 'have' message from 1002 for the piece 67.
+2024-04-23T19:44:05.640501700: Peer 1001 received the 'have' message from 1002 for the piece 109.
+2024-04-23T19:44:05.644535800: Peer 1001 received the 'have' message from 1002 for the piece 126.
+2024-04-23T19:44:05.648006900: Peer 1001 received the 'have' message from 1002 for the piece 32.
+2024-04-23T19:44:05.650018200: Peer 1001 received the 'have' message from 1002 for the piece 35.
+2024-04-23T19:44:05.652016900: Peer 1001 received the 'have' message from 1002 for the piece 26.
+2024-04-23T19:44:05.654017700: Peer 1001 received the 'have' message from 1002 for the piece 125.
+2024-04-23T19:44:05.658555100: Peer 1001 received the 'have' message from 1002 for the piece 16.
+2024-04-23T19:44:05.664591100: Peer 1001 received the 'have' message from 1002 for the piece 132.
+2024-04-23T19:44:05.669197: Peer 1001 received the 'have' message from 1002 for the piece 23.
+2024-04-23T19:44:05.673222: Peer 1001 received the 'have' message from 1002 for the piece 37.
+2024-04-23T19:44:05.676218700: Peer 1001 received the 'have' message from 1002 for the piece 30.
+2024-04-23T19:44:05.681816: Peer 1001 received the 'have' message from 1002 for the piece 98.
+2024-04-23T19:44:05.684808700: Peer 1001 received the 'have' message from 1002 for the piece 131.
+2024-04-23T19:44:05.688332: Peer 1001 received the 'have' message from 1002 for the piece 17.
+2024-04-23T19:44:05.692375300: Peer 1001 received the 'have' message from 1002 for the piece 91.
+2024-04-23T19:44:05.695374500: Peer 1001 received the 'have' message from 1002 for the piece 28.
+2024-04-23T19:44:05.700958: Peer 1001 received the 'have' message from 1002 for the piece 3.
+2024-04-23T19:44:05.703956900: Peer 1001 received the 'have' message from 1002 for the piece 69.
+2024-04-23T19:44:05.708489500: Peer 1001 received the 'have' message from 1002 for the piece 58.
+2024-04-23T19:44:05.712525900: Peer 1001 received the 'have' message from 1002 for the piece 43.
+2024-04-23T19:44:05.715528900: Peer 1001 received the 'have' message from 1002 for the piece 10.
+2024-04-23T19:44:05.719102300: Peer 1001 received the 'have' message from 1002 for the piece 44.
+2024-04-23T19:44:05.724087700: Peer 1001 received the 'have' message from 1002 for the piece 46.
+2024-04-23T19:44:05.729613200: Peer 1001 received the 'have' message from 1002 for the piece 53.
+2024-04-23T19:44:05.734633100: Peer 1001 received the 'have' message from 1002 for the piece 107.
+2024-04-23T19:44:05.736627400: Peer 1001 received the 'have' message from 1002 for the piece 65.
+2024-04-23T19:44:05.739910400: Peer 1001 received the 'have' message from 1002 for the piece 64.
+2024-04-23T19:44:05.750080200: Peer 1001 received the 'not interested' message from 1002.
+2024-04-23T19:44:10.223336300: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:15.223358200: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:20.216776: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:25.214491900: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:30.223927500: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:35.224242500: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:40.211116500: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:44:45.213405500: Peer 1001 has the preferred neighbors [].

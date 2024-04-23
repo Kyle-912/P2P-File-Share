@@ -88,9 +88,6 @@ public class Server implements Runnable {
 
 		public void run() {
 			try {
-				// FIXME: Used to get the catch to shut up for now DELETE LATER
-				_out.flush();
-				System.out.println("Now Running Server " + _peerProcess._peerId + " connected to " + _clientId);
 				while (true) {
 					// Get message from socket
 					Message currMsg = receiveMessage();

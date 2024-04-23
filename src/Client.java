@@ -45,8 +45,6 @@ public class Client extends Thread {
 
 	public void run() {
 		try {
-			System.out.println("Now Running Client " + _peerProcess._peerId + " connected to " + _serverId);
-			_out.flush();
 			while (true) {
 				// Get message from socket
 				Message currMsg = receiveMessage();
@@ -65,12 +63,6 @@ public class Client extends Thread {
 					sendMessage(respMsg.getMessageBytes());
 				}
 			}
-		} catch (ConnectException e) {
-			System.err.println("Connection refused. You need to initiate a server first.");
-		} catch (UnknownHostException unknownHost) {
-			System.err.println("You are trying to connect to an unknown host!");
-		} catch (IOException ioException) {
-			ioException.printStackTrace();
 		} catch (Exception e) {
 			System.err.println(e);
 		} finally {
