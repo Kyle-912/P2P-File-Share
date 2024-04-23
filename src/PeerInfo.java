@@ -1,5 +1,5 @@
 public class PeerInfo {
-    public int _pid, _listenerPort;
+    public int _pid, _listenerPort, _numPieces;
     public String _hostname;
     public boolean _hasFile; //TODO: update whenever bitfield is updated
     public byte[] _bitfield;
@@ -8,6 +8,7 @@ public class PeerInfo {
         _pid = Integer.parseInt(pid);
         _listenerPort = Integer.parseInt(listenerPort);
         _hostname = hostname;
+        _numPieces = numPieces;
 
         if (hasFile.equals("1")) {
             _hasFile = true;
@@ -21,5 +22,21 @@ public class PeerInfo {
                 _bitfield[i / 8] |= (1 << (7 - (i % 8)));
             }
         }
+
+        hasCompleteFile();
+    }
+
+    public void updateBitfield(int pieceIndex) {
+        _bitfield[pieceIndex / 8] = (byte) (_bitfield[pieceIndex / 8] | (1 << (7 - (pieceIndex % 8))));
+        System.out.println("Adding piece " + pieceIndex);
+    }
+
+    public boolean hasCompleteFile() {
+        for (int i=0; i < _numPieces; i++) {
+            if ((_bitfield[i / 8] & (1 << (7 - (i % 8)))) == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

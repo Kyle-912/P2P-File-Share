@@ -156,6 +156,7 @@ public class peerProcess {
         _clients.put(i, client);
         Thread clientThread = new Thread(client);
         clientThread.start();
+        _downloadRates.put(i, 0);
     }
 
     public synchronized void updatePreferredPeers() {
@@ -256,6 +257,7 @@ public class peerProcess {
                 break;
 
             case CHOKE:
+                System.out.println("Choked by peer " + otherPeerId);
                 if (_recentRequests.get(otherPeerId) != null) {
                     _requests.removeAll(_recentRequests.get(otherPeerId));
                 }
@@ -269,13 +271,14 @@ public class peerProcess {
                 break;
 
             case UNCHOKE:
+                System.out.println("Unchoked by peer " + otherPeerId);
                 try {
                     _log.LogUnchoked(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 //see if interested in unchoked peer
-                if (decideInterestInPeer(_peerId)) {
+                if (decideInterestInPeer(otherPeerId)) {
                     //get random number of interesting pieces
                     int pieceNum = getNotRequestedRandomPieceNeededfromPeer(otherPeerId);
                     //add to total requests
@@ -341,16 +344,17 @@ public class peerProcess {
                 break;
 
             case REQUEST:
-                // Verify other peer is unchoked
-                if (!_preferredPeerIds.contains(otherPeerId) && !(_optimisticallyUnchokedPeerId == otherPeerId)) {
-                    System.out.println("Blocked request from " + otherPeerId);
-                    break;
-                } 
+                // FIXME: Verify other peer is unchoked
+                //if (!_preferredPeerIds.contains(otherPeerId) && !(_optimisticallyUnchokedPeerId == otherPeerId)) {
+                //    System.out.println("Blocked request from " + otherPeerId);
+                //    break;
+                //} 
 
                 // Load piece from _fileBytes
                 int pieceNum = ByteBuffer.wrap(message._mdata).getInt();
                 int ind = pieceNum * _pieceSize;
-                byte[] pieceBytes = Arrays.copyOfRange(_fileBytes, ind, ind + _pieceSize);
+                int pieceReturnSize = Math.min(_pieceSize, _fileSize - ind);
+                byte[] pieceBytes = Arrays.copyOfRange(_fileBytes, ind, ind + pieceReturnSize);
                 
                 // Return PIECE message to server
                 byte[] msgData = ByteBuffer.allocate(pieceBytes.length + 4).putInt(pieceNum).put(pieceBytes).array();
@@ -358,7 +362,84 @@ public class peerProcess {
                 break;
 
             case PIECE:
+                // Split message data into piece index and data
+                ByteBuffer data = ByteBuffer.wrap(message._mdata);
+                int pieceReceivedInd = data.getInt();
+                if (data.remaining() != _pieceSize) {
+                    System.out.println("Received piece size is incorrect");
+                }
+                byte[] pieceReceivedData = new byte[data.remaining()];
+                data.get(pieceReceivedData);
 
+                // Update bitfield to have piece index
+                _peers.get(_peerId).updateBitfield(pieceReceivedInd);
+
+                // Update _fileData to have piece data
+                int startIndex = pieceReceivedInd * _pieceSize;
+                System.arraycopy(pieceReceivedData, 0, _fileBytes, startIndex, pieceReceivedData.length);
+
+                // Update DownloadRate Map
+                _downloadRates.put(otherPeerId, _downloadRates.get(otherPeerId) + 1);
+
+                // Remove pending request for piece received
+                _requests.remove((Integer) pieceReceivedInd);
+
+                // Send new have message to each connected client
+                for (Server.Handler serverHandler : _servers.values()) {
+                    serverHandler.sendHaveMessage(pieceReceivedInd);
+                }
+
+                // Log piece received
+                try {
+                    _log.LogDownloadedPiece(otherPeerId, pieceReceivedInd);
+                }
+                catch (IOException e){
+                    System.err.println(e);
+                }
+
+                // Check if entire file is received
+                if (_peers.get(_peerId).hasCompleteFile()) {
+                    try {
+                        // Write data to output file
+                        System.out.println("Starting write file");
+                        FileOutputStream oStream = new FileOutputStream(_file);
+                        oStream.write(_fileBytes);
+                        oStream.close();
+                        System.out.println("Finished write file");
+
+                        // Log complete file
+                        _log.LogDownloadComplete();
+                    }
+                    catch (IOException e) {
+                        System.err.println(e);
+                    }
+                }
+
+                // Recheck peers, send NOT INTERESTED if not interested
+                _clients.forEach((key, clientThread) -> {
+                    if (!decideInterestInPeer(clientThread._serverId)) {
+                        clientThread.sendNotIntMessage();
+                    }
+                });
+
+                // Continue requesting until no more interesting pieces
+                if (decideInterestInPeer(otherPeerId)) {
+                    // Get random interesting piece number and add to list
+                    int getPieceNum = getNotRequestedRandomPieceNeededfromPeer(otherPeerId);
+                    if (getPieceNum == -1) break;
+                    addRequest(getPieceNum);
+
+                    //modify peer specific requests
+                    ArrayList<Integer> newPeerRequestList = new ArrayList<>();
+                    if (_recentRequests.get(otherPeerId) != null) {
+                        newPeerRequestList = _recentRequests.get(otherPeerId);
+                    }
+                    newPeerRequestList.add(getPieceNum);
+                    _recentRequests.put(otherPeerId, newPeerRequestList);
+
+                    // Make request message for client to send
+                    responseMessage = new Message(Message.TYPES.REQUEST, ByteBuffer.allocate(4).putInt(getPieceNum).array());
+                }
                 break;
 
             default:
@@ -375,7 +456,7 @@ public class peerProcess {
     public ArrayList<Integer> getNeededPiecesFromPeer(Integer otherPeerId) {
         ArrayList<Integer> neededPieceNums = new ArrayList<>();
         // Add index if local bit 0 and other bit 1 because they have it and we don't
-        for (int i = 0; i < (_fileSize / _pieceSize); i++) {
+        for (int i = 0; i < (_numPieces); i++) {
             boolean localZero = (_peers.get(_peerId)._bitfield[i / 8] & (1 << (7 - (i % 8)))) == 0;
             boolean passedOne = (_peers.get(otherPeerId)._bitfield[i / 8] & (1 << (7 - (i % 8)))) != 0;
             if (localZero && passedOne) {

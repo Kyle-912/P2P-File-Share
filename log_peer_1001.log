@@ -1,20 +1,2 @@
-2024-04-23T15:18:50.683150: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:18:55.660864500: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:00.663520200: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:01.295174900: Peer 1001 is connected from Peer 1002.
-2024-04-23T15:19:01.343109100: Peer 1001 makes a connection to Peer 1002.
-2024-04-23T15:19:01.358172800: Peer 1001 received the 'interested' message from 1002.
-2024-04-23T15:19:01.661855800: Peer 1001 has the optimistically unchoked neighbor 1002.
-2024-04-23T15:19:05.663212500: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:10.654057200: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:15.664422200: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:20.664439900: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:25.662071400: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:30.654964200: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:35.660983100: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:40.657414600: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:45.656354200: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:50.663636600: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:19:55.651351300: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:20:00.657673900: Peer 1001 has the preferred neighbors [].
-2024-04-23T15:20:05.661744600: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:34:00.053517400: Peer 1001 has the preferred neighbors [].
+2024-04-23T19:34:05.031218200: Peer 1001 has the preferred neighbors [].
