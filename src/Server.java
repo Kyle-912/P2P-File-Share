@@ -56,10 +56,13 @@ public class Server implements Runnable {
 				System.out.println("Error setting up input and output streams");
 			}
 
-			// Handshake from client
 			try {
+				// Handshake from client
 				_messageIn = (byte[]) _in.readObject();
 				_clientId = Message.readHandshakeMsg(_messageIn);
+
+				// Add to this peer's server map
+				_peerProcess._servers.put(_clientId, this);
 
 				// Log connection
 				System.out.println("LOG: Peer " + _peerProcess._peerId + " is connected from Peer " + _clientId);
