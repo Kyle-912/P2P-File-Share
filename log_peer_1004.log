@@ -1,0 +1,565 @@
+2024-04-23T19:31:48.147652200: Peer 1004 is connected from Peer 1001.
+2024-04-23T19:31:48.147652200: Peer 1004 makes a connection to Peer 1001.
+2024-04-23T19:31:48.157169: Peer 1004 makes a connection to Peer 1002.
+2024-04-23T19:31:48.158172400: Peer 1004 is connected from Peer 1002.
+2024-04-23T19:31:48.158172400: Peer 1004 makes a connection to Peer 1003.
+2024-04-23T19:31:48.160174100: Peer 1004 is connected from Peer 1003.
+2024-04-23T19:31:48.165169700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.166284: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.166284: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.173283300: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:31:48.254563: Peer 1004 is unchoked by 1002.
+2024-04-23T19:31:48.257077500: Peer 1004 has downloaded the piece 39 from 1002. Now the number of pieces it has is 1.
+2024-04-23T19:31:48.262076: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.262076: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.262076: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.263076400: Peer 1004 has downloaded the piece 36 from 1002. Now the number of pieces it has is 2.
+2024-04-23T19:31:48.263076400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.264075900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.264075900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.264075900: Peer 1004 has downloaded the piece 61 from 1002. Now the number of pieces it has is 3.
+2024-04-23T19:31:48.264075900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.264075900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.264075900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.265583600: Peer 1004 has downloaded the piece 35 from 1002. Now the number of pieces it has is 4.
+2024-04-23T19:31:48.266599200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.267608200: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.267608200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.268608500: Peer 1004 has downloaded the piece 104 from 1002. Now the number of pieces it has is 5.
+2024-04-23T19:31:48.269598900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.269598900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.270604100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.271599: Peer 1004 has downloaded the piece 15 from 1002. Now the number of pieces it has is 6.
+2024-04-23T19:31:48.272606100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.272606100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.272606100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.274600900: Peer 1004 has downloaded the piece 98 from 1002. Now the number of pieces it has is 7.
+2024-04-23T19:31:48.274600900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.274600900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.275602900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.276117200: Peer 1004 has downloaded the piece 110 from 1002. Now the number of pieces it has is 8.
+2024-04-23T19:31:48.278171300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.278171300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.278171300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.279128200: Peer 1004 has downloaded the piece 72 from 1002. Now the number of pieces it has is 9.
+2024-04-23T19:31:48.279128200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.280133100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.280133100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.280133100: Peer 1004 has downloaded the piece 101 from 1002. Now the number of pieces it has is 10.
+2024-04-23T19:31:48.281130800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.281130800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.281130800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.282129100: Peer 1004 has downloaded the piece 54 from 1002. Now the number of pieces it has is 11.
+2024-04-23T19:31:48.283132900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.283132900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.283132900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.284128800: Peer 1004 has downloaded the piece 120 from 1002. Now the number of pieces it has is 12.
+2024-04-23T19:31:48.284128800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.285712500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.285831100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.290739800: Peer 1004 has downloaded the piece 65 from 1002. Now the number of pieces it has is 13.
+2024-04-23T19:31:48.292765600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.292765600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.292765600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.293734: Peer 1004 has downloaded the piece 0 from 1002. Now the number of pieces it has is 14.
+2024-04-23T19:31:48.293734: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.293734: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.293734: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.295247500: Peer 1004 has downloaded the piece 1 from 1002. Now the number of pieces it has is 15.
+2024-04-23T19:31:48.296259800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.296259800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.296259800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.297261: Peer 1004 has downloaded the piece 81 from 1002. Now the number of pieces it has is 16.
+2024-04-23T19:31:48.297261: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.297261: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.297261: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.298263: Peer 1004 has downloaded the piece 10 from 1002. Now the number of pieces it has is 17.
+2024-04-23T19:31:48.299263100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.299263100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.299263100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.300263100: Peer 1004 has downloaded the piece 2 from 1002. Now the number of pieces it has is 18.
+2024-04-23T19:31:48.301262300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.301262300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.301262300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.303261300: Peer 1004 has downloaded the piece 124 from 1002. Now the number of pieces it has is 19.
+2024-04-23T19:31:48.303261300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.303261300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.304266500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.305262700: Peer 1004 has downloaded the piece 52 from 1002. Now the number of pieces it has is 20.
+2024-04-23T19:31:48.305778500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.305778500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.305778500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.306793900: Peer 1004 has downloaded the piece 22 from 1002. Now the number of pieces it has is 21.
+2024-04-23T19:31:48.307788300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.307788300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.307788300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.309808600: Peer 1004 has downloaded the piece 97 from 1002. Now the number of pieces it has is 22.
+2024-04-23T19:31:48.310817400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.310817400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.310817400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.312792500: Peer 1004 has downloaded the piece 38 from 1002. Now the number of pieces it has is 23.
+2024-04-23T19:31:48.312792500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.312792500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.312792500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.313791400: Peer 1004 has downloaded the piece 74 from 1002. Now the number of pieces it has is 24.
+2024-04-23T19:31:48.313791400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.313791400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.313791400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.313791400: Peer 1004 has downloaded the piece 53 from 1002. Now the number of pieces it has is 25.
+2024-04-23T19:31:48.315303800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.315303800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.315303800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.315303800: Peer 1004 has downloaded the piece 56 from 1002. Now the number of pieces it has is 26.
+2024-04-23T19:31:48.316319400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.316319400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.316319400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.317320300: Peer 1004 has downloaded the piece 113 from 1002. Now the number of pieces it has is 27.
+2024-04-23T19:31:48.317320300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.317320300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.318353100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.319322600: Peer 1004 has downloaded the piece 108 from 1002. Now the number of pieces it has is 28.
+2024-04-23T19:31:48.320322200: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.320322200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.320322200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.321315800: Peer 1004 has downloaded the piece 125 from 1002. Now the number of pieces it has is 29.
+2024-04-23T19:31:48.321315800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.321315800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.321315800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.322318: Peer 1004 has downloaded the piece 42 from 1002. Now the number of pieces it has is 30.
+2024-04-23T19:31:48.323323300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.323323300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.323323300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.324320600: Peer 1004 has downloaded the piece 77 from 1002. Now the number of pieces it has is 31.
+2024-04-23T19:31:48.325338800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.325338800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.325338800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.326883100: Peer 1004 has downloaded the piece 68 from 1002. Now the number of pieces it has is 32.
+2024-04-23T19:31:48.327869800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.327869800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.327869800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.327869800: Peer 1004 has downloaded the piece 131 from 1002. Now the number of pieces it has is 33.
+2024-04-23T19:31:48.328868500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.328868500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.328868500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.328868500: Peer 1004 has downloaded the piece 80 from 1002. Now the number of pieces it has is 34.
+2024-04-23T19:31:48.328868500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.328868500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.328868500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.330378500: Peer 1004 has downloaded the piece 7 from 1002. Now the number of pieces it has is 35.
+2024-04-23T19:31:48.330378500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.330378500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.330378500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.331389600: Peer 1004 has downloaded the piece 44 from 1002. Now the number of pieces it has is 36.
+2024-04-23T19:31:48.331389600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.331389600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.331389600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.332389500: Peer 1004 has downloaded the piece 60 from 1002. Now the number of pieces it has is 37.
+2024-04-23T19:31:48.332389500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.332389500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.332389500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.333394200: Peer 1004 has downloaded the piece 29 from 1002. Now the number of pieces it has is 38.
+2024-04-23T19:31:48.334393800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.334393800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.334393800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.335933: Peer 1004 has downloaded the piece 9 from 1002. Now the number of pieces it has is 39.
+2024-04-23T19:31:48.335933: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.335933: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.335933: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.336945600: Peer 1004 has downloaded the piece 45 from 1002. Now the number of pieces it has is 40.
+2024-04-23T19:31:48.337946300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.337946300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.337946300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.338942800: Peer 1004 has downloaded the piece 6 from 1002. Now the number of pieces it has is 41.
+2024-04-23T19:31:48.339952500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.339952500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.339952500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.340947100: Peer 1004 has downloaded the piece 84 from 1002. Now the number of pieces it has is 42.
+2024-04-23T19:31:48.341979700: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.341979700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.341979700: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.343947800: Peer 1004 has downloaded the piece 28 from 1002. Now the number of pieces it has is 43.
+2024-04-23T19:31:48.343947800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.343947800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.343947800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.345461: Peer 1004 has downloaded the piece 121 from 1002. Now the number of pieces it has is 44.
+2024-04-23T19:31:48.345461: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.345461: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.345461: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.346474300: Peer 1004 has downloaded the piece 103 from 1002. Now the number of pieces it has is 45.
+2024-04-23T19:31:48.346474300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.346474300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.346474300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.347476600: Peer 1004 has downloaded the piece 71 from 1002. Now the number of pieces it has is 46.
+2024-04-23T19:31:48.348477100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.348477100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.348477100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.349475700: Peer 1004 has downloaded the piece 64 from 1002. Now the number of pieces it has is 47.
+2024-04-23T19:31:48.349475700: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.349475700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.349475700: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.350477200: Peer 1004 has downloaded the piece 4 from 1002. Now the number of pieces it has is 48.
+2024-04-23T19:31:48.352488600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.352488600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.352488600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.353475500: Peer 1004 has downloaded the piece 95 from 1002. Now the number of pieces it has is 49.
+2024-04-23T19:31:48.353475500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.353475500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.353475500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.354475900: Peer 1004 has downloaded the piece 111 from 1002. Now the number of pieces it has is 50.
+2024-04-23T19:31:48.354475900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.354475900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.354475900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.355987: Peer 1004 has downloaded the piece 117 from 1002. Now the number of pieces it has is 51.
+2024-04-23T19:31:48.355987: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.355987: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.355987: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.357000200: Peer 1004 has downloaded the piece 76 from 1002. Now the number of pieces it has is 52.
+2024-04-23T19:31:48.357000200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.357000200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.357995600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.359001900: Peer 1004 has downloaded the piece 107 from 1002. Now the number of pieces it has is 53.
+2024-04-23T19:31:48.359001900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.359001900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.360011: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.360994200: Peer 1004 has downloaded the piece 92 from 1002. Now the number of pieces it has is 54.
+2024-04-23T19:31:48.361997300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.361997300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.361997300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.362999900: Peer 1004 has downloaded the piece 82 from 1002. Now the number of pieces it has is 55.
+2024-04-23T19:31:48.362999900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.362999900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.362999900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.363998: Peer 1004 has downloaded the piece 85 from 1002. Now the number of pieces it has is 56.
+2024-04-23T19:31:48.363998: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.363998: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.363998: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.363998: Peer 1004 has downloaded the piece 91 from 1002. Now the number of pieces it has is 57.
+2024-04-23T19:31:48.363998: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.365511900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.365511900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.366523600: Peer 1004 has downloaded the piece 118 from 1002. Now the number of pieces it has is 58.
+2024-04-23T19:31:48.366523600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.367531700: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.367531700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.368520500: Peer 1004 has downloaded the piece 59 from 1002. Now the number of pieces it has is 59.
+2024-04-23T19:31:48.369524800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.369524800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.369524800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.370520800: Peer 1004 has downloaded the piece 49 from 1002. Now the number of pieces it has is 60.
+2024-04-23T19:31:48.371522: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.371522: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.371522: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.372520800: Peer 1004 has downloaded the piece 75 from 1002. Now the number of pieces it has is 61.
+2024-04-23T19:31:48.373522200: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.373522200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.373522200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.375522300: Peer 1004 has downloaded the piece 47 from 1002. Now the number of pieces it has is 62.
+2024-04-23T19:31:48.375522300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.375522300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.375522300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.378679100: Peer 1004 has downloaded the piece 12 from 1002. Now the number of pieces it has is 63.
+2024-04-23T19:31:48.378679100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.378679100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.379670700: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.380668: Peer 1004 has downloaded the piece 27 from 1002. Now the number of pieces it has is 64.
+2024-04-23T19:31:48.380668: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.380668: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.380668: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.382671100: Peer 1004 has downloaded the piece 69 from 1002. Now the number of pieces it has is 65.
+2024-04-23T19:31:48.382671100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.382671100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.382671100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.383671: Peer 1004 has downloaded the piece 109 from 1002. Now the number of pieces it has is 66.
+2024-04-23T19:31:48.383671: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.383671: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.383671: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.386225: Peer 1004 has downloaded the piece 17 from 1002. Now the number of pieces it has is 67.
+2024-04-23T19:31:48.386225: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.386225: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.386225: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.387226700: Peer 1004 has downloaded the piece 94 from 1002. Now the number of pieces it has is 68.
+2024-04-23T19:31:48.387226700: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.387226700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.387226700: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.388234200: Peer 1004 has downloaded the piece 73 from 1002. Now the number of pieces it has is 69.
+2024-04-23T19:31:48.388234200: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.388234200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.388234200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.389235600: Peer 1004 has downloaded the piece 25 from 1002. Now the number of pieces it has is 70.
+2024-04-23T19:31:48.389235600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.389235600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.389235600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.390233800: Peer 1004 has downloaded the piece 112 from 1002. Now the number of pieces it has is 71.
+2024-04-23T19:31:48.391236900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.391236900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.391236900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.392245600: Peer 1004 has downloaded the piece 3 from 1002. Now the number of pieces it has is 72.
+2024-04-23T19:31:48.393234200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.393234200: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.393234200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.394236800: Peer 1004 has downloaded the piece 100 from 1002. Now the number of pieces it has is 73.
+2024-04-23T19:31:48.394236800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.394236800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.394236800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.395236300: Peer 1004 has downloaded the piece 102 from 1002. Now the number of pieces it has is 74.
+2024-04-23T19:31:48.395236300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.395236300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.395236300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.396357800: Peer 1004 has downloaded the piece 8 from 1002. Now the number of pieces it has is 75.
+2024-04-23T19:31:48.396357800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.396357800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.397356200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.398359900: Peer 1004 has downloaded the piece 66 from 1002. Now the number of pieces it has is 76.
+2024-04-23T19:31:48.398359900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.398359900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.398359900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.399357: Peer 1004 has downloaded the piece 26 from 1002. Now the number of pieces it has is 77.
+2024-04-23T19:31:48.400358400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.400358400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.400358400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.401362600: Peer 1004 has downloaded the piece 48 from 1002. Now the number of pieces it has is 78.
+2024-04-23T19:31:48.401362600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.401362600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.401362600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.403360900: Peer 1004 has downloaded the piece 11 from 1002. Now the number of pieces it has is 79.
+2024-04-23T19:31:48.404358600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.404358600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.404358600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.405359900: Peer 1004 has downloaded the piece 20 from 1002. Now the number of pieces it has is 80.
+2024-04-23T19:31:48.405359900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.405359900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.405359900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.406667600: Peer 1004 has downloaded the piece 105 from 1002. Now the number of pieces it has is 81.
+2024-04-23T19:31:48.407667800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.407667800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.407667800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.408669: Peer 1004 has downloaded the piece 70 from 1002. Now the number of pieces it has is 82.
+2024-04-23T19:31:48.409666800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.409666800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.409666800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.410666600: Peer 1004 has downloaded the piece 129 from 1002. Now the number of pieces it has is 83.
+2024-04-23T19:31:48.412678600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.412678600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.412678600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.413664500: Peer 1004 has downloaded the piece 5 from 1002. Now the number of pieces it has is 84.
+2024-04-23T19:31:48.413664500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.413664500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.413664500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.415172900: Peer 1004 has downloaded the piece 32 from 1002. Now the number of pieces it has is 85.
+2024-04-23T19:31:48.416183800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.416183800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.416183800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.417185500: Peer 1004 has downloaded the piece 37 from 1002. Now the number of pieces it has is 86.
+2024-04-23T19:31:48.417185500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.418212500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.418212500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.419201: Peer 1004 has downloaded the piece 19 from 1002. Now the number of pieces it has is 87.
+2024-04-23T19:31:48.420192400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.420192400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.420192400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.421191800: Peer 1004 has downloaded the piece 63 from 1002. Now the number of pieces it has is 88.
+2024-04-23T19:31:48.422192500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.422192500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.422192500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.423193400: Peer 1004 has downloaded the piece 106 from 1002. Now the number of pieces it has is 89.
+2024-04-23T19:31:48.423193400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.423193400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.424193900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.425193900: Peer 1004 has downloaded the piece 78 from 1002. Now the number of pieces it has is 90.
+2024-04-23T19:31:48.425704: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.425704: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.425704: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.427745400: Peer 1004 has downloaded the piece 23 from 1002. Now the number of pieces it has is 91.
+2024-04-23T19:31:48.427745400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.428737700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.428737700: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.428737700: Peer 1004 has downloaded the piece 62 from 1002. Now the number of pieces it has is 92.
+2024-04-23T19:31:48.430249600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.430249600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.430249600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.431259800: Peer 1004 has downloaded the piece 46 from 1002. Now the number of pieces it has is 93.
+2024-04-23T19:31:48.431259800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.432261100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.432261100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.433262400: Peer 1004 has downloaded the piece 126 from 1002. Now the number of pieces it has is 94.
+2024-04-23T19:31:48.433262400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.433262400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.433262400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.435268700: Peer 1004 has downloaded the piece 127 from 1002. Now the number of pieces it has is 95.
+2024-04-23T19:31:48.435795500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.435795500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.435795500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.436805100: Peer 1004 has downloaded the piece 14 from 1002. Now the number of pieces it has is 96.
+2024-04-23T19:31:48.437807600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.437807600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.437807600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.438806400: Peer 1004 has downloaded the piece 40 from 1002. Now the number of pieces it has is 97.
+2024-04-23T19:31:48.438806400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.438806400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.438806400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.439825700: Peer 1004 has downloaded the piece 79 from 1002. Now the number of pieces it has is 98.
+2024-04-23T19:31:48.440808700: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.440808700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.440808700: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.440808700: Peer 1004 has downloaded the piece 132 from 1002. Now the number of pieces it has is 99.
+2024-04-23T19:31:48.441806900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.442812800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.442812800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.443808500: Peer 1004 has downloaded the piece 13 from 1002. Now the number of pieces it has is 100.
+2024-04-23T19:31:48.443808500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.445346400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.445346400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.446368700: Peer 1004 has downloaded the piece 89 from 1002. Now the number of pieces it has is 101.
+2024-04-23T19:31:48.447362800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.447362800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.447362800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.448360600: Peer 1004 has downloaded the piece 43 from 1002. Now the number of pieces it has is 102.
+2024-04-23T19:31:48.448360600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.448360600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.449361700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.450366600: Peer 1004 has downloaded the piece 122 from 1002. Now the number of pieces it has is 103.
+2024-04-23T19:31:48.450366600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.451241500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.451241500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.451752100: Peer 1004 has downloaded the piece 33 from 1002. Now the number of pieces it has is 104.
+2024-04-23T19:31:48.452790600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.452790600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.453762400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.453762400: Peer 1004 has downloaded the piece 24 from 1002. Now the number of pieces it has is 105.
+2024-04-23T19:31:48.453762400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.453762400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.453762400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.455269600: Peer 1004 has downloaded the piece 31 from 1002. Now the number of pieces it has is 106.
+2024-04-23T19:31:48.455269600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.455269600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.455269600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.456277300: Peer 1004 has downloaded the piece 114 from 1002. Now the number of pieces it has is 107.
+2024-04-23T19:31:48.456277300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.457280300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.457280300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.458292800: Peer 1004 has downloaded the piece 55 from 1002. Now the number of pieces it has is 108.
+2024-04-23T19:31:48.458292800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.458292800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.458292800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.460302500: Peer 1004 has downloaded the piece 93 from 1002. Now the number of pieces it has is 109.
+2024-04-23T19:31:48.460302500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.460302500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.461289: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.461289: Peer 1004 has downloaded the piece 119 from 1002. Now the number of pieces it has is 110.
+2024-04-23T19:31:48.461289: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.461289: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.461289: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.462289500: Peer 1004 has downloaded the piece 83 from 1002. Now the number of pieces it has is 111.
+2024-04-23T19:31:48.462289500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.462289500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.462289500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.463288: Peer 1004 has downloaded the piece 86 from 1002. Now the number of pieces it has is 112.
+2024-04-23T19:31:48.463288: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.463288: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.463288: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.464289300: Peer 1004 has downloaded the piece 67 from 1002. Now the number of pieces it has is 113.
+2024-04-23T19:31:48.464289300: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.464289300: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.464289300: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.464289300: Peer 1004 has downloaded the piece 18 from 1002. Now the number of pieces it has is 114.
+2024-04-23T19:31:48.465291100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.465291100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.465291100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.465798400: Peer 1004 has downloaded the piece 58 from 1002. Now the number of pieces it has is 115.
+2024-04-23T19:31:48.466807200: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.466807200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.466807200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.467815400: Peer 1004 has downloaded the piece 57 from 1002. Now the number of pieces it has is 116.
+2024-04-23T19:31:48.468819600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.468819600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.468819600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.469813700: Peer 1004 has downloaded the piece 128 from 1002. Now the number of pieces it has is 117.
+2024-04-23T19:31:48.469813700: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.469813700: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.469813700: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.470807400: Peer 1004 has downloaded the piece 87 from 1002. Now the number of pieces it has is 118.
+2024-04-23T19:31:48.471809100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.471809100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.471809100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.473809900: Peer 1004 has downloaded the piece 90 from 1002. Now the number of pieces it has is 119.
+2024-04-23T19:31:48.473809900: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.473809900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.473809900: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.476338400: Peer 1004 has downloaded the piece 88 from 1002. Now the number of pieces it has is 120.
+2024-04-23T19:31:48.477336400: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.477336400: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.477336400: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.478348100: Peer 1004 has downloaded the piece 123 from 1002. Now the number of pieces it has is 121.
+2024-04-23T19:31:48.478348100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.478348100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.479347600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.480351500: Peer 1004 has downloaded the piece 51 from 1002. Now the number of pieces it has is 122.
+2024-04-23T19:31:48.481350500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.481350500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.481350500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.482349300: Peer 1004 has downloaded the piece 116 from 1002. Now the number of pieces it has is 123.
+2024-04-23T19:31:48.484352800: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.484352800: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.484352800: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.485350300: Peer 1004 has downloaded the piece 130 from 1002. Now the number of pieces it has is 124.
+2024-04-23T19:31:48.485871100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.485871100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.485871100: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.487902: Peer 1004 has downloaded the piece 96 from 1002. Now the number of pieces it has is 125.
+2024-04-23T19:31:48.487902: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.487902: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.487902: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.488906: Peer 1004 has downloaded the piece 34 from 1002. Now the number of pieces it has is 126.
+2024-04-23T19:31:48.489901600: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.489901600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.489901600: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.490900700: Peer 1004 has downloaded the piece 50 from 1002. Now the number of pieces it has is 127.
+2024-04-23T19:31:48.490900700: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.490900700: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.491900: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.492901500: Peer 1004 has downloaded the piece 30 from 1002. Now the number of pieces it has is 128.
+2024-04-23T19:31:48.492901500: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.492901500: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.492901500: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.493901: Peer 1004 has downloaded the piece 41 from 1002. Now the number of pieces it has is 129.
+2024-04-23T19:31:48.495520100: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.495520100: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.496461600: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.497444: Peer 1004 has downloaded the piece 21 from 1002. Now the number of pieces it has is 130.
+2024-04-23T19:31:48.497444: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.497444: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.497444: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.498455100: Peer 1004 has downloaded the piece 99 from 1002. Now the number of pieces it has is 131.
+2024-04-23T19:31:48.499454: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.499454: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.499454: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.500455700: Peer 1004 has downloaded the piece 115 from 1002. Now the number of pieces it has is 132.
+2024-04-23T19:31:48.501455200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:48.501455200: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.501455200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.503458800: Peer 1004 has downloaded the piece 16 from 1002. Now the number of pieces it has is 133.
+2024-04-23T19:31:48.508995300: Peer 1004 has downloaded the complete file.
+2024-04-23T19:31:48.512992200: Peer 1004 received the 'not interested' message from 1003.
+2024-04-23T19:31:48.512992200: Peer 1004 received the 'not interested' message from 1002.
+2024-04-23T19:31:48.512992200: Peer 1004 received the 'not interested' message from 1001.
+2024-04-23T19:31:53.173959700: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:31:53.253465100: Peer 1004 is choked by 1002.
+2024-04-23T19:31:58.174427: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:03.166408: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:08.161768900: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:13.169612: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:18.168516400: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:23.163478900: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:28.173018800: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:33.169460100: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:38.174417300: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:43.165346400: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:48.170491700: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:48.829852400: Peer 1004 is connected from Peer 1006.
+2024-04-23T19:32:48.830853100: Peer 1004 makes a connection to Peer 1006.
+2024-04-23T19:32:48.839377600: Peer 1004 received the 'not interested' message from 1006.
+2024-04-23T19:32:53.175395100: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:32:58.168228900: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:33:03.168939: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:33:08.165712: Peer 1004 has the preferred neighbors [].
+2024-04-23T19:33:13.166355300: Peer 1004 has the preferred neighbors [].

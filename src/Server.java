@@ -105,6 +105,7 @@ public class Server implements Runnable {
 
 					// Send response message if applicable
 					if (respMsg != null) {
+						System.out.println("Server " + _peerProcess._peerId + " Sending message " + respMsg.getTypeName());
 						sendMessage(respMsg.getMessageBytes());
 					}
 				}
@@ -149,8 +150,7 @@ public class Server implements Runnable {
 
 		// TODO: USE THESE FROM PEERPROCESS WHEN CHANGING PREFERRED PEERS AND OPTIMISTICALLY UNCHOKING NEIGHBORS
 		public void sendHaveMessage(int pieceNum) {
-			sendMessage(
-					new Message(Message.TYPES.HAVE, ByteBuffer.allocate(4).putInt(pieceNum).array()).getMessageBytes());
+			sendMessage(new Message(Message.TYPES.HAVE, ByteBuffer.allocate(4).putInt(pieceNum).array()).getMessageBytes());
 		}
 
 		public void unchoke() {
