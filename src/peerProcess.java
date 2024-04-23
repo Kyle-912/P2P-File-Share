@@ -23,7 +23,7 @@ public class peerProcess {
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
     ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
-    ArrayList<Integer> _recentRequests = new ArrayList<>(); // List of requested piece indices
+    ConcurrentHashMap<Integer, ArrayList<Integer>> _recentRequests = new ConcurrentHashMap<>(); // map of last requested piece by each client
     Server _server;
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
     ConcurrentHashMap<Integer, Server.Handler> _servers = new ConcurrentHashMap<>();
@@ -232,6 +232,7 @@ public class peerProcess {
             case CHOKE:
                 if (_recentRequests.get(otherPeerId) != null)
                     _requests.removeAll(_recentRequests.get(otherPeerId));
+
                 try {
                     _log.LogChoked(_peerId);
                 } catch (IOException e) {
@@ -248,7 +249,7 @@ public class peerProcess {
                 break;
 
             case INTERESTED:
-                if(!_interestedPeerIds.contains(otherPeerId)){
+                if (!_interestedPeerIds.contains(otherPeerId)) {
                     _interestedPeerIds.add(otherPeerId);
                 }
                 try {
@@ -259,7 +260,7 @@ public class peerProcess {
                 break;
 
             case NOT_INTERESTED:
-                if(_interestedPeerIds.contains(otherPeerId)){
+                if (_interestedPeerIds.contains(otherPeerId)) {
                     _interestedPeerIds.remove(otherPeerId);
                 }
                 try {
