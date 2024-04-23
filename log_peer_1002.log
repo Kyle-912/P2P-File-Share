@@ -1,3 +1,18 @@
-2024-04-23T13:29:21.023158100: Peer 1002 makes a connection to Peer 1001.
-2024-04-23T13:29:21.102910100: Peer 1002 is connected from Peer 1001.
-2024-04-23T13:29:21.119966200: Peer 1002 received the 'not interested' message from 1002.
+2024-04-23T15:19:01.317802: Peer 1002 makes a connection to Peer 1001.
+2024-04-23T15:19:01.343109100: Peer 1002 is connected from Peer 1001.
+2024-04-23T15:19:01.346122800: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:01.353145300: Peer 1002 received the 'not interested' message from 1001.
+2024-04-23T15:19:01.660856500: Peer 1002 is unchoked by 1001.
+2024-04-23T15:19:06.350054800: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:11.339206: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:16.338142200: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:21.350233900: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:26.348457300: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:31.341703200: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:36.350077300: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:41.344971500: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:46.344091600: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:51.337223500: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:19:56.343579600: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:20:01.342939900: Peer 1002 has the preferred neighbors [].
+2024-04-23T15:20:06.349954600: Peer 1002 has the preferred neighbors [].
