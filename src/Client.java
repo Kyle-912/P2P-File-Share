@@ -32,8 +32,6 @@ public class Client extends Thread {
 			// Send handshake message
 			sendMessage(Message.getHandshakeMsg(_peerProcess._peerId));
 
-		
-
 			// Log connection
 			try {
 				_peerProcess._log.LogTCPTo(_serverId);
@@ -47,7 +45,7 @@ public class Client extends Thread {
 
 	public void run() {
 		try {
-			System.out.println("Now Running Client "+ _peerProcess._peerId + " connected to " + _serverId);
+			System.out.println("Now Running Client " + _peerProcess._peerId + " connected to " + _serverId);
 			// FIXME: Used to get the catch to shut up for now DELETE LATER
 			_out.flush();
 			while (true) {
@@ -67,7 +65,6 @@ public class Client extends Thread {
 					sendMessage(respMsg.getMessageBytes());
 				}
 			}
-
 		} catch (ConnectException e) {
 			System.err.println("Connection refused. You need to initiate a server first.");
 		} catch (UnknownHostException unknownHost) {
