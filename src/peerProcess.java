@@ -33,6 +33,11 @@ public class peerProcess {
     Log _log = new Log();
     ScheduledExecutorService _scheduler = Executors.newScheduledThreadPool(2);
 
+    // File Data
+    String _filePath;
+    File _file;
+    byte[] _fileBytes;
+
     public static void main(String args[]) throws Exception {
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
         System.out.println("Peer " + peerProcess._peerId + " is running");
@@ -43,6 +48,7 @@ public class peerProcess {
         _log.createLog(peerId);
         readCommonConfig();
         readPeerInfoConfig();
+        initializeFileData();
         startServer();
         connectToPeers();
         _scheduler.scheduleAtFixedRate(this::updatePreferredPeers, 0, _unchokingInterval, TimeUnit.SECONDS);
@@ -117,6 +123,26 @@ public class peerProcess {
         _server = new Server(_peers.get(_peerId)._listenerPort, this);
         Thread serverThread = new Thread(_server);
         serverThread.start();
+    }
+
+    private void initializeFileData() {
+        // Create file in directory
+        _filePath = "./peer_" + _peerId;
+        new File(_filePath).mkdir();
+        _file = new File(_filePath + "/" + _fileName);
+        _fileBytes = new byte[_fileSize];
+
+        // read data into _fileBytes if starting with file
+        if (_peers.get(_peerId)._hasFile) {
+            try {  
+                FileInputStream inStream = new FileInputStream(_file);
+                inStream.read(_fileBytes);
+                inStream.close();
+            }
+            catch (IOException e) {
+                System.out.println(e);
+            }
+        }
     }
 
     private void connectToPeers() {
@@ -315,7 +341,20 @@ public class peerProcess {
                 break;
 
             case REQUEST:
+                // Verify other peer is unchoked
+                if (!_preferredPeerIds.contains(otherPeerId) && !(_optimisticallyUnchokedPeerId == otherPeerId)) {
+                    System.out.println("Blocked request from " + otherPeerId);
+                    break;
+                } 
 
+                // Load piece from _fileBytes
+                int pieceNum = ByteBuffer.wrap(message._mdata).getInt();
+                int ind = pieceNum * _pieceSize;
+                byte[] pieceBytes = Arrays.copyOfRange(_fileBytes, ind, ind + _pieceSize);
+                
+                // Return PIECE message to server
+                byte[] msgData = ByteBuffer.allocate(pieceBytes.length + 4).putInt(pieceNum).put(pieceBytes).array();
+                responseMessage = new Message(Message.TYPES.PIECE, msgData);
                 break;
 
             case PIECE:
