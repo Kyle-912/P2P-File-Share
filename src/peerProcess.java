@@ -346,7 +346,6 @@ public class peerProcess {
         return neededPieceNums;
     }
 
-    //following two methods used in UNCHOKING and PIECE
     public void addRequest(Integer pieceNum) {
         if (!_requests.contains(pieceNum)) {
             _requests.add(pieceNum);
@@ -357,14 +356,14 @@ public class peerProcess {
 
     public int getNotRequestedRandomPieceNeededfromPeer(Integer otherPeerId) {
         ArrayList<Integer> interestingPieceNums = getNeededPiecesFromPeer(otherPeerId);
-        // do not include pieces that have already been requested
+        // Do not include pieces that have already been requested
         interestingPieceNums.removeAll(_requests);
 
         if (interestingPieceNums.size() == 0) {
             System.out.println("Cannot find interesting piece from peer that has not already been requested.");
             return -1;
         }
-        //else get random piece from interesting pieces
+        // Else get random piece from interesting pieces
         Random random = new Random();
         int pieceNum = interestingPieceNums.get(random.nextInt(interestingPieceNums.size()));
         return pieceNum;
