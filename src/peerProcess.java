@@ -23,7 +23,7 @@ public class peerProcess {
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
     ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
-    ConcurrentHashMap<Integer, ArrayList<Integer>> _recentRequests = new ConcurrentHashMap<>(); // map of last requested piece by each client
+    ConcurrentHashMap<Integer, ArrayList<Integer>> _recentRequests = new ConcurrentHashMap<>(); // Last requested piece by each peer
     Server _server;
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
     ConcurrentHashMap<Integer, Server.Handler> _servers = new ConcurrentHashMap<>();
@@ -230,11 +230,13 @@ public class peerProcess {
                 break;
 
             case CHOKE:
-                if (_recentRequests.get(otherPeerId) != null)
+                if (_recentRequests.get(otherPeerId) != null) {
                     _requests.removeAll(_recentRequests.get(otherPeerId));
+                }
+                _recentRequests.put(otherPeerId, new ArrayList<Integer>());
 
                 try {
-                    _log.LogChoked(_peerId);
+                    _log.LogChoked(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -242,7 +244,7 @@ public class peerProcess {
 
             case UNCHOKE:
                 try {
-                    _log.LogUnchoked(_peerId);
+                    _log.LogUnchoked(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -253,7 +255,7 @@ public class peerProcess {
                     _interestedPeerIds.add(otherPeerId);
                 }
                 try {
-                    _log.LogReceivedInterested(_peerId);
+                    _log.LogReceivedInterested(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -264,7 +266,7 @@ public class peerProcess {
                     _interestedPeerIds.remove(otherPeerId);
                 }
                 try {
-                    _log.LogReceivedNotInterested(_peerId);
+                    _log.LogReceivedNotInterested(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
