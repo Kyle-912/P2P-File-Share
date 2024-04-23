@@ -32,7 +32,7 @@ public class PeerInfo {
     }
 
     public boolean hasCompleteFile() {
-        for (int i=0; i < _numPieces; i++) {
+        for (int i = 0; i < _numPieces; i++) {
             if ((_bitfield[i / 8] & (1 << (7 - (i % 8)))) == 0) {
                 return false;
             }
