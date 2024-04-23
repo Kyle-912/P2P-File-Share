@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.*;
@@ -213,7 +214,6 @@ public class peerProcess {
         }
     }
 
-    // TODO:
     public synchronized Message handleMessage(Integer otherPeerId, Message message) throws IOException {
         Message responseMessage = null;
         switch (message.getTypeName()) {
@@ -229,7 +229,7 @@ public class peerProcess {
                 }
                 break;
 
-            case CHOKE:
+                case CHOKE:
                 if (_recentRequests.get(otherPeerId) != null) {
                     _requests.removeAll(_recentRequests.get(otherPeerId));
                 }
@@ -248,9 +248,30 @@ public class peerProcess {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                //see if interested in unchoked peer
+                if(decideInterestInPeer(_peerId)){
+                    //get random number of interesting pieces
+                    int pieceNum = getNotRequestedRandomPieceNeededfromPeer(otherPeerId);
+                    //add to total requests
+                    addRequest(pieceNum);
+
+                    //modify peer specific requests
+                    ArrayList<Integer> newPeerRequestList = new ArrayList<>();
+                    if(_recentRequests.get(otherPeerId) != null){
+                        newPeerRequestList = _recentRequests.get(otherPeerId);
+                    }
+
+                    newPeerRequestList.add(pieceNum);
+                    _recentRequests.put(otherPeerId, newPeerRequestList);
+
+                    //modify response message
+                    responseMessage = new Message(Message.TYPES.REQUEST, ByteBuffer.allocate(4).putInt(pieceNum).array());
+                }else{
+                    System.out.println("Not interested in unchoked peer " + otherPeerId);
+                }
                 break;
 
-            case INTERESTED:
+                case INTERESTED:
                 if (!_interestedPeerIds.contains(otherPeerId)) {
                     _interestedPeerIds.add(otherPeerId);
                 }
@@ -310,5 +331,29 @@ public class peerProcess {
             }
         }
         return neededPieceNums;
+    }
+
+    //following two methods used in UNCHOKING and PIECE 
+    public void addRequest(Integer pieceNum) {
+        if (!_requests.contains(pieceNum)) {
+            _requests.add(pieceNum);
+        } else {
+            System.out.println("Request already pending for piece " + pieceNum);
+        }
+    }
+
+    public int getNotRequestedRandomPieceNeededfromPeer(Integer otherPeerId) {
+        ArrayList<Integer> interestingPieceNums = getNeededPiecesFromPeer(otherPeerId);
+        // do not include pieces that have already been requested
+        interestingPieceNums.removeAll(_requests);
+
+        if (interestingPieceNums.size() == 0) {
+            System.out.println("Cannot find interesting piece from peer that has not already been requested.");
+            return -1;
+        }
+        //else get random piece from interesting pieces
+        Random random = new Random();
+        int pieceNum = interestingPieceNums.get(random.nextInt(interestingPieceNums.size()));
+        return pieceNum;
     }
 }

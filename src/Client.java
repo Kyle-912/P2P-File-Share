@@ -46,7 +46,6 @@ public class Client extends Thread {
 	public void run() {
 		try {
 			System.out.println("Now Running Client " + _peerProcess._peerId + " connected to " + _serverId);
-			// FIXME: Used to get the catch to shut up for now DELETE LATER
 			_out.flush();
 			while (true) {
 				// Get message from socket
