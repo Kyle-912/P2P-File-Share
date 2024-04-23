@@ -24,7 +24,7 @@ public class Message {
 
     // Create message constructor (requires type to be passed)
     public Message(TYPES msgType, byte[] mdata) {
-        if (!mdata.equals(null)) {
+        if (mdata!=(null)) {
             _mlength = mdata.length + 1;
         } else {
             _mlength = 1;

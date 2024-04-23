@@ -218,7 +218,23 @@ public class peerProcess {
         Message responseMessage = null;
 
         switch (message.getTypeName()) {
+            case BITFIELD:
+                //add peer bitfield
+                _peers.get(peerId)._bitfield = message._mdata;
+                for (byte b : _peers.get(peerId)._bitfield) {
+                    System.out.println(Integer.toBinaryString(b & 255 | 256).substring(1));
+                }
+                //respond if interested 
+                if(decideInterestInPeer(peerId)){
+                    System.out.println("PEER "+_peerId +" interested in peer " + peerId);
+                    responseMessage = new Message(Message.TYPES.INTERESTED, null);
+                } else {
+                    responseMessage = new Message(Message.TYPES.NOT_INTERESTED, null);
+                }
+                break;
             case CHOKE:
+                //remove all requests from connected peer
+                //implement removePendingRequests()
                 try {
                     _log.LogChoked(_peerId);
                 } catch (IOException e) {
@@ -258,10 +274,6 @@ public class peerProcess {
                 }
                 break;
 
-            case BITFIELD:
-
-                break;
-
             case REQUEST:
 
                 break;
@@ -275,4 +287,36 @@ public class peerProcess {
         }
         return responseMessage;
     }
+
+    // TODO
+    public synchronized void updatePreferredPeers() {
+        System.out.println("Updating preferred peers");
+    }
+
+    // TODO
+    public synchronized void updateOptimisticallyUnchokedPeer() {
+        System.out.println("Updating optimistically unchoked peer");
+    }
+
+    //TODO
+    public boolean decideInterestInPeer(int peerId) {
+        int numPieces = getNeededPiecesFromPeer(peerId).size();
+        System.out.println("Peer "+ _peerId +" is deciding interest in peer " + peerId +": number of pieces needed: " + numPieces);
+        return (numPieces>0);
+    }
+
+    public ArrayList<Integer> getNeededPiecesFromPeer(Integer peerId) {
+        ArrayList<Integer> neededPieceNums = new ArrayList<>();
+
+        // add index if local bit 0 and other bit 1 because they have it and we dont 
+        for (int i = 0; i < (_fileSize / _pieceSize); i++) {
+            boolean localZero = (_peers.get(_peerId)._bitfield[i / 8] & (1 << (7 - (i % 8)))) == 0;
+            boolean passedOne = (_peers.get(peerId)._bitfield[i / 8] & (1 << (7 - (i % 8)))) != 0;
+            if (localZero && passedOne) {
+                neededPieceNums.add(i);
+            } 
+        }
+        return neededPieceNums;
+    }
+
 }
