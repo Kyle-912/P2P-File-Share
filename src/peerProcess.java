@@ -24,7 +24,7 @@ public class peerProcess {
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
     ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
-    ArrayList<Integer> _recentRequests = new ArrayList<>(); // List of requested piece indices
+    ConcurrentHashMap<Integer, ArrayList<Integer>> _recentRequests = new ConcurrentHashMap<>(); // Last requested piece by each peer
     Server _server;
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
     ConcurrentHashMap<Integer, Server.Handler> _servers = new ConcurrentHashMap<>();
@@ -240,7 +240,6 @@ public class peerProcess {
         }
     }
 
-    // TODO:
     public synchronized Message handleMessage(Integer otherPeerId, Message message) throws IOException {
         Message responseMessage = null;
         switch (message.getTypeName()) {
@@ -257,10 +256,13 @@ public class peerProcess {
                 break;
 
             case CHOKE:
-                if (_recentRequests.get(otherPeerId) != null)
-                    //FIXME: _requests.removeAll(_recentRequests.get(otherPeerId));
+                if (_recentRequests.get(otherPeerId) != null) {
+                    _requests.removeAll(_recentRequests.get(otherPeerId));
+                }
+                _recentRequests.put(otherPeerId, new ArrayList<Integer>());
+
                 try {
-                    _log.LogChoked(_peerId);
+                    _log.LogChoked(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -268,37 +270,71 @@ public class peerProcess {
 
             case UNCHOKE:
                 try {
-                    _log.LogUnchoked(_peerId);
+                    _log.LogUnchoked(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
+                }
+                //see if interested in unchoked peer
+                if (decideInterestInPeer(_peerId)) {
+                    //get random number of interesting pieces
+                    int pieceNum = getNotRequestedRandomPieceNeededfromPeer(otherPeerId);
+                    //add to total requests
+                    addRequest(pieceNum);
+
+                    //modify peer specific requests
+                    ArrayList<Integer> newPeerRequestList = new ArrayList<>();
+                    if (_recentRequests.get(otherPeerId) != null) {
+                        newPeerRequestList = _recentRequests.get(otherPeerId);
+                    }
+
+                    newPeerRequestList.add(pieceNum);
+                    _recentRequests.put(otherPeerId, newPeerRequestList);
+
+                    //modify response message
+                    responseMessage = new Message(Message.TYPES.REQUEST,
+                            ByteBuffer.allocate(4).putInt(pieceNum).array());
+                } else {
+                    System.out.println("Not interested in unchoked peer " + otherPeerId);
                 }
                 break;
 
             case INTERESTED:
-                if(!_interestedPeerIds.contains(otherPeerId)){
+                if (!_interestedPeerIds.contains(otherPeerId)) {
                     _interestedPeerIds.add(otherPeerId);
                 }
                 try {
-                    _log.LogReceivedInterested(_peerId);
+                    _log.LogReceivedInterested(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 break;
 
             case NOT_INTERESTED:
-                if(_interestedPeerIds.contains(otherPeerId)){
+                if (_interestedPeerIds.contains(otherPeerId)) {
                     _interestedPeerIds.remove(otherPeerId);
                 }
                 try {
-                    _log.LogReceivedNotInterested(_peerId);
+                    _log.LogReceivedNotInterested(otherPeerId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 break;
 
             case HAVE:
+                byte[] otherBitfield = _peers.get(otherPeerId)._bitfield;
+                otherBitfield[ByteBuffer.wrap(message._mdata).getInt()
+                        / 8] = (byte) (otherBitfield[ByteBuffer.wrap(message._mdata).getInt() / 8]
+                                | (1 << (7 - (ByteBuffer.wrap(message._mdata).getInt() % 8))));
+                _peers.get(otherPeerId)._bitfield = otherBitfield;
+
+                if (decideInterestInPeer(otherPeerId)) {
+                    responseMessage = new Message(Message.TYPES.INTERESTED, null);
+                } else {
+                    responseMessage = new Message(Message.TYPES.NOT_INTERESTED, null);
+                }
+
                 try {
-                    _log.LogReceivedHave(_peerId, -1); // FIXME: doesn't log proper pieceIndex
+                    _log.LogReceivedHave(otherPeerId, ByteBuffer.wrap(message._mdata).getInt());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -347,5 +383,28 @@ public class peerProcess {
             }
         }
         return neededPieceNums;
+    }
+
+    public void addRequest(Integer pieceNum) {
+        if (!_requests.contains(pieceNum)) {
+            _requests.add(pieceNum);
+        } else {
+            System.out.println("Request already pending for piece " + pieceNum);
+        }
+    }
+
+    public int getNotRequestedRandomPieceNeededfromPeer(Integer otherPeerId) {
+        ArrayList<Integer> interestingPieceNums = getNeededPiecesFromPeer(otherPeerId);
+        // Do not include pieces that have already been requested
+        interestingPieceNums.removeAll(_requests);
+
+        if (interestingPieceNums.size() == 0) {
+            System.out.println("Cannot find interesting piece from peer that has not already been requested.");
+            return -1;
+        }
+        // Else get random piece from interesting pieces
+        Random random = new Random();
+        int pieceNum = interestingPieceNums.get(random.nextInt(interestingPieceNums.size()));
+        return pieceNum;
     }
 }
