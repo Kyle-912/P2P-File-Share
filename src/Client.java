@@ -24,11 +24,11 @@ public class Client extends Thread {
 			_out = new ObjectOutputStream(_requestSocket.getOutputStream());
 			_out.flush();
 			_in = new ObjectInputStream(_requestSocket.getInputStream());
-		} catch (Exception e){
+		} catch (Exception e) {
 			System.out.println("Error setting up input and output streams");
 		}
 
-		try{
+		try {
 			// Send handshake message
 			sendMessage(Message.getHandshakeMsg(_peerProcess._peerId));
 
@@ -43,31 +43,29 @@ public class Client extends Thread {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-		} catch (Exception e){
+		} catch (Exception e) {
 			System.out.println("Error sending handshake message");
 		}
 	}
 
 	public void run() {
 		try {
-			System.out.println("NowRunnnig" + _serverId);
-			//used to get the catch to shut up for now DELETE LATER
+			System.out.println("Now Running " + _serverId);
+			// FIXME: Used to get the catch to shut up for now DELETE LATER
 			_out.flush();
 			while (true) {
-				// get message from socket
+				// Get message from socket
 				Message currMsg = receiveMessage();
 
-				// pass to peer and store response message
+				// Pass to peer and store response message
 				Message respMsg = null;
 				try {
 					respMsg = _peerProcess.handleMessage(_serverId, currMsg);
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-	
-				// send response message if applicable
+
+				// Send response message if applicable
 				if (respMsg != null) {
 					sendMessage(respMsg.getMessageBytes());
 				}
@@ -107,19 +105,20 @@ public class Client extends Thread {
 	}
 
 	private Message receiveMessage() {
-        try {
-            byte[] msg;
-            synchronized (_in) {
-                msg = (byte[]) _in.readObject();
-            }
-            return new Message(msg);
-        } catch (Exception e) {
-            System.out.println("Error receiving message in server thread.");
-            return null;
-        }
-    }
-	//send to client NOTINTERESTED message, called from peerProcess
+		try {
+			byte[] msg;
+			synchronized (_in) {
+				msg = (byte[]) _in.readObject();
+			}
+			return new Message(msg);
+		} catch (Exception e) {
+			System.out.println("Error receiving message in server thread.");
+			return null;
+		}
+	}
+
+	// Send to client NOTINTERESTED message, called from peerProcess
 	public void sendNotIntMessage() {
-        sendMessage(new Message(Message.TYPES.NOT_INTERESTED, null).getMessageBytes());
-    }
+		sendMessage(new Message(Message.TYPES.NOT_INTERESTED, null).getMessageBytes());
+	}
 }

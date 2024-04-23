@@ -11,10 +11,10 @@ public class PeerInfo {
 
         if (hasFile.equals("1")) {
             _hasFile = true;
-        }
-        else {
+        } else {
             _hasFile = false;
         }
+
         _bitfield = new byte[(numPieces + 7) / 8];
         if (_hasFile) {
             for (int i = 0; i < numPieces; i++) {
