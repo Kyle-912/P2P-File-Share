@@ -28,6 +28,7 @@ public class peerProcess {
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
     ConcurrentHashMap<Integer, PeerInfo> _peers = new ConcurrentHashMap<>();
     Log log = new Log();
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 
     public static void main(String args[]) throws Exception {
         peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
@@ -42,6 +43,8 @@ public class peerProcess {
         startServer();
         connectToPeers();
         // TODO: CREATE SCHEDULER AND AT GIVEN INTERVALS RECOMPUTE PREFERRED PEERS AND OPTIMISTICALLY UNCHOKED PEER
+        // scheduler.scheduleAtFixedRate(this::updatePreferredPeers, 0, unchokingInterval, TimeUnit.SECONDS);
+        // scheduler.scheduleAtFixedRate(this::updateOUN, 1, optimisticUnchokingInterval, TimeUnit.SECONDS);
     }
 
     private void readCommonConfig() {
