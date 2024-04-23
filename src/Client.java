@@ -32,12 +32,9 @@ public class Client extends Thread {
 			// Send handshake message
 			sendMessage(Message.getHandshakeMsg(_peerProcess._peerId));
 
-			// Receive bitfield from server and set it in peerInfo
-			Message msg = receiveMessage();
-			_peerProcess._peers.get(_serverId)._bitfield = msg._mdata;
+		
 
 			// Log connection
-			System.out.println("LOG: Peer " + _peerProcess._peerId + " makes a connection to " + _serverId);
 			try {
 				_peerProcess.log.LogTCPTo(_serverId);
 			} catch (IOException e) {
@@ -50,7 +47,7 @@ public class Client extends Thread {
 
 	public void run() {
 		try {
-			System.out.println("Now Running " + _serverId);
+			System.out.println("Now Running Client "+ _peerProcess._peerId+ " connected to " + _serverId);
 			// FIXME: Used to get the catch to shut up for now DELETE LATER
 			_out.flush();
 			while (true) {
