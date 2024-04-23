@@ -222,7 +222,7 @@ public class peerProcess {
     // TODO:
     public synchronized Message handleMessage(Integer peerId, Message message) throws IOException {
         // Handle message
-        Message response = null;
+        Message responseMessage = null;
 
         switch (message.getTypeName()) {
             case CHOKE:
@@ -280,6 +280,6 @@ public class peerProcess {
             default:
                 break;
         }
-        return response;
+        return responseMessage;
     }
 }
