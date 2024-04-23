@@ -229,7 +229,7 @@ public class peerProcess {
                 }
                 break;
 
-                case CHOKE:
+            case CHOKE:
                 if (_recentRequests.get(otherPeerId) != null) {
                     _requests.removeAll(_recentRequests.get(otherPeerId));
                 }
@@ -249,7 +249,7 @@ public class peerProcess {
                     throw new RuntimeException(e);
                 }
                 //see if interested in unchoked peer
-                if(decideInterestInPeer(_peerId)){
+                if (decideInterestInPeer(_peerId)) {
                     //get random number of interesting pieces
                     int pieceNum = getNotRequestedRandomPieceNeededfromPeer(otherPeerId);
                     //add to total requests
@@ -257,7 +257,7 @@ public class peerProcess {
 
                     //modify peer specific requests
                     ArrayList<Integer> newPeerRequestList = new ArrayList<>();
-                    if(_recentRequests.get(otherPeerId) != null){
+                    if (_recentRequests.get(otherPeerId) != null) {
                         newPeerRequestList = _recentRequests.get(otherPeerId);
                     }
 
@@ -265,13 +265,14 @@ public class peerProcess {
                     _recentRequests.put(otherPeerId, newPeerRequestList);
 
                     //modify response message
-                    responseMessage = new Message(Message.TYPES.REQUEST, ByteBuffer.allocate(4).putInt(pieceNum).array());
-                }else{
+                    responseMessage = new Message(Message.TYPES.REQUEST,
+                            ByteBuffer.allocate(4).putInt(pieceNum).array());
+                } else {
                     System.out.println("Not interested in unchoked peer " + otherPeerId);
                 }
                 break;
 
-                case INTERESTED:
+            case INTERESTED:
                 if (!_interestedPeerIds.contains(otherPeerId)) {
                     _interestedPeerIds.add(otherPeerId);
                 }
@@ -333,7 +334,7 @@ public class peerProcess {
         return neededPieceNums;
     }
 
-    //following two methods used in UNCHOKING and PIECE 
+    //following two methods used in UNCHOKING and PIECE
     public void addRequest(Integer pieceNum) {
         if (!_requests.contains(pieceNum)) {
             _requests.add(pieceNum);
