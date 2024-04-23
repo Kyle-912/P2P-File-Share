@@ -1,10 +1,13 @@
 public class PeerInfo {
     public int _pid, _listenerPort;
     public String _hostname;
-    public boolean _hasFile;
+    public boolean _hasFile; //TODO: update whenever bitfield is updated
     public byte[] _bitfield;
 
-    PeerInfo(String pid, String hostname, String listenerPort, String hasFile, int numPieces) {
+    PeerInfo() {
+    }
+
+    public void setInfo(String pid, String hostname, String listenerPort, String hasFile, int numPieces) {
         _pid = Integer.parseInt(pid);
         _listenerPort = Integer.parseInt(listenerPort);
         _hostname = hostname;

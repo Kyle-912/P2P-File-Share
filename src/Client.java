@@ -36,7 +36,7 @@ public class Client extends Thread {
 
 			// Log connection
 			try {
-				_peerProcess.log.LogTCPTo(_serverId);
+				_peerProcess._log.LogTCPTo(_serverId);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
