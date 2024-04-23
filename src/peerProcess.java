@@ -23,6 +23,7 @@ public class peerProcess {
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
     ArrayList<Integer> _requests = new ArrayList<>(); // List of requested piece indices
+    ArrayList<Integer> _recentRequests = new ArrayList<>(); // List of requested piece indices
     Server _server;
     ConcurrentHashMap<Integer, Client> _clients = new ConcurrentHashMap<>();
     ConcurrentHashMap<Integer, Server.Handler> _servers = new ConcurrentHashMap<>();
@@ -213,15 +214,15 @@ public class peerProcess {
     }
 
     // TODO:
-    public synchronized Message handleMessage(Integer peerId, Message message) throws IOException {
+    public synchronized Message handleMessage(Integer otherPeerId, Message message) throws IOException {
         Message responseMessage = null;
         switch (message.getTypeName()) {
             case BITFIELD:
                 // Add peer bitfield
-                _peers.get(peerId)._bitfield = message._mdata;
+                _peers.get(otherPeerId)._bitfield = message._mdata;
                 // Respond if interested
-                if (decideInterestInPeer(peerId)) {
-                    System.out.println("PEER " + _peerId + " interested in peer " + peerId);
+                if (decideInterestInPeer(otherPeerId)) {
+                    System.out.println("PEER " + _peerId + " interested in peer " + otherPeerId);
                     responseMessage = new Message(Message.TYPES.INTERESTED, null);
                 } else {
                     responseMessage = new Message(Message.TYPES.NOT_INTERESTED, null);
@@ -229,8 +230,8 @@ public class peerProcess {
                 break;
 
             case CHOKE:
-                // Remove all requests from connected peer
-                // TODO: Implement removePendingRequests()
+                if (_recentRequests.get(otherPeerId) != null)
+                    _requests.removeAll(_recentRequests.get(otherPeerId));
                 try {
                     _log.LogChoked(_peerId);
                 } catch (IOException e) {
@@ -247,8 +248,8 @@ public class peerProcess {
                 break;
 
             case INTERESTED:
-                if(!_interestedPeerIds.contains(peerId)){
-                    _interestedPeerIds.add(peerId);
+                if(!_interestedPeerIds.contains(otherPeerId)){
+                    _interestedPeerIds.add(otherPeerId);
                 }
                 try {
                     _log.LogReceivedInterested(_peerId);
@@ -258,8 +259,8 @@ public class peerProcess {
                 break;
 
             case NOT_INTERESTED:
-                if(_interestedPeerIds.contains(peerId)){
-                    _interestedPeerIds.remove(peerId);
+                if(_interestedPeerIds.contains(otherPeerId)){
+                    _interestedPeerIds.remove(otherPeerId);
                 }
                 try {
                     _log.LogReceivedNotInterested(_peerId);
@@ -290,17 +291,17 @@ public class peerProcess {
         return responseMessage;
     }
 
-    public boolean decideInterestInPeer(int peerId) {
-        int numPieces = getNeededPiecesFromPeer(peerId).size();
+    public boolean decideInterestInPeer(int otherPeerId) {
+        int numPieces = getNeededPiecesFromPeer(otherPeerId).size();
         return (numPieces > 0);
     }
 
-    public ArrayList<Integer> getNeededPiecesFromPeer(Integer peerId) {
+    public ArrayList<Integer> getNeededPiecesFromPeer(Integer otherPeerId) {
         ArrayList<Integer> neededPieceNums = new ArrayList<>();
         // Add index if local bit 0 and other bit 1 because they have it and we don't
         for (int i = 0; i < (_fileSize / _pieceSize); i++) {
             boolean localZero = (_peers.get(_peerId)._bitfield[i / 8] & (1 << (7 - (i % 8)))) == 0;
-            boolean passedOne = (_peers.get(peerId)._bitfield[i / 8] & (1 << (7 - (i % 8)))) != 0;
+            boolean passedOne = (_peers.get(otherPeerId)._bitfield[i / 8] & (1 << (7 - (i % 8)))) != 0;
             if (localZero && passedOne) {
                 neededPieceNums.add(i);
             }
