@@ -44,7 +44,6 @@ public class peerProcess {
         readPeerInfoConfig();
         startServer();
         connectToPeers();
-        // TODO: CREATE SCHEDULER AND AT GIVEN INTERVALS RECOMPUTE PREFERRED PEERS AND OPTIMISTICALLY UNCHOKED PEER
         _scheduler.scheduleAtFixedRate(this::updatePreferredPeers, 0, _unchokingInterval, TimeUnit.SECONDS);
         _scheduler.scheduleAtFixedRate(this::updateOptimisticallyUnchokedPeer, 1, _optimisticUnchokingInterval,
                 TimeUnit.SECONDS);
@@ -132,7 +131,6 @@ public class peerProcess {
         clientThread.start();
     }
 
-    // TODO:
     public synchronized void updatePreferredPeers() {
         ArrayList<Integer> oldPreferredPeerIds = new ArrayList<>(_preferredPeerIds);
         if (!_pInfo._hasFile) {
@@ -153,17 +151,14 @@ public class peerProcess {
                     }).limit(_numPreferredNeighbors).map(Map.Entry::getKey).collect(Collectors.toList()));
         }
 
-        // Find peers to unchoke
         ArrayList<Integer> toChoke = new ArrayList<>(oldPreferredPeerIds);
         toChoke.removeAll(_preferredPeerIds);
         toChoke.remove((Integer) _optimisticallyUnchokedPeerId);
 
-        // Find peers to choke
         ArrayList<Integer> toUnchoke = new ArrayList<>(_preferredPeerIds);
         toUnchoke.removeAll(oldPreferredPeerIds);
         toUnchoke.remove((Integer) _optimisticallyUnchokedPeerId);
 
-        // Do the changes
         _servers.forEach((key, value) -> {
             if (toUnchoke.contains(key)) {
                 value.unchoke();
@@ -185,7 +180,6 @@ public class peerProcess {
         }
     }
 
-    // TODO:
     public synchronized void updateOptimisticallyUnchokedPeer() {
         ArrayList<Integer> optimisticallyUnchokedCandidates = new ArrayList<>(_interestedPeerIds);
         optimisticallyUnchokedCandidates.removeAll(_preferredPeerIds);
@@ -221,7 +215,6 @@ public class peerProcess {
 
     // TODO:
     public synchronized Message handleMessage(Integer peerId, Message message) throws IOException {
-        // Handle message
         Message responseMessage = null;
 
         switch (message.getTypeName()) {
