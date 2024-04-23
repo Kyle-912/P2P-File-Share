@@ -295,8 +295,20 @@ public class peerProcess {
                 break;
 
             case HAVE:
+                byte[] otherBitfield = _peers.get(otherPeerId)._bitfield;
+                otherBitfield[ByteBuffer.wrap(message._mdata).getInt()
+                        / 8] = (byte) (otherBitfield[ByteBuffer.wrap(message._mdata).getInt() / 8]
+                                | (1 << (7 - (ByteBuffer.wrap(message._mdata).getInt() % 8))));
+                _peers.get(otherPeerId)._bitfield = otherBitfield;
+
+                if (decideInterestInPeer(otherPeerId)) {
+                    responseMessage = new Message(Message.TYPES.INTERESTED, null);
+                } else {
+                    responseMessage = new Message(Message.TYPES.NOT_INTERESTED, null);
+                }
+
                 try {
-                    _log.LogReceivedHave(_peerId, -1); // FIXME: doesn't log proper pieceIndex
+                    _log.LogReceivedHave(otherPeerId, ByteBuffer.wrap(message._mdata).getInt());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
