@@ -247,6 +247,9 @@ public class peerProcess {
                 break;
 
             case INTERESTED:
+                if(!_interestedPeerIds.contains(peerId)){
+                    _interestedPeerIds.add(peerId);
+                }
                 try {
                     _log.LogReceivedInterested(_peerId);
                 } catch (IOException e) {
@@ -255,6 +258,9 @@ public class peerProcess {
                 break;
 
             case NOT_INTERESTED:
+                if(_interestedPeerIds.contains(peerId)){
+                    _interestedPeerIds.remove(peerId);
+                }
                 try {
                     _log.LogReceivedNotInterested(_peerId);
                 } catch (IOException e) {
