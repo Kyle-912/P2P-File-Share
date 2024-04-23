@@ -18,6 +18,10 @@ public class Message {
         PIECE
     }
 
+    public TYPES getTypeName() {
+        return TYPES.values()[_mtype];
+    }
+
     // Create message constructor (requires type to be passed)
     public Message(TYPES msgType, byte[] mdata) {
         if (!mdata.equals(null)) {
@@ -71,11 +75,6 @@ public class Message {
             bytes.put(_mdata);
         }
         return bytes.array();
-    }
-
-    // Getting the type as a constant value since enum is local to the class
-    public TYPES getTypeName() {
-        return TYPES.values()[_mtype];
     }
 
     public static byte[] getHandshakeMsg(int peerId) {

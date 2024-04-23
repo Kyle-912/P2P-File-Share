@@ -35,7 +35,7 @@ public class Server implements Runnable {
 	 * A handler thread class. Handlers are spawned from the listening
 	 * loop and are responsible for dealing with a single client's requests.
 	 */
-	private static class Handler extends Thread {
+	public static class Handler extends Thread {
 		peerProcess _peerProcess; // ParentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
 		private byte[] _messageIn; // Message received from the client
 		//private byte[] _messageOut; // Message sent to the client
@@ -64,7 +64,7 @@ public class Server implements Runnable {
 				// Log connection
 				System.out.println("LOG: Peer " + _peerProcess._peerId + " is connected from Peer " + _clientId);
 				try {
-					_peerProcess.log.LogTCPFrom(_clientId);
+					_peerProcess._log.LogTCPFrom(_clientId);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
