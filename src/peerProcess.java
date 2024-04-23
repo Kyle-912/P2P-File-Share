@@ -19,7 +19,6 @@ public class peerProcess {
 
     // Member Variables
     int _peerId;
-    PeerInfo _pInfo = new PeerInfo();
     Integer _optimisticallyUnchokedPeerId;
     ArrayList<Integer> _preferredPeerIds = new ArrayList<>(); // List of preferred peer IDs
     ArrayList<Integer> _interestedPeerIds = new ArrayList<>(); // List of interested peer IDs
@@ -102,8 +101,8 @@ public class peerProcess {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
                 if (parts.length == 4) {
-                    _pInfo.setInfo(parts[0], parts[1], parts[2], parts[3], _numPieces);
-                    _peers.put(_pInfo._pid, _pInfo);
+                    PeerInfo pInfo = new PeerInfo(parts[0], parts[1], parts[2], parts[3], _numPieces);
+                    _peers.put(pInfo._pid, pInfo);
                 }
             }
         } catch (IOException e) {
@@ -133,7 +132,7 @@ public class peerProcess {
 
     public synchronized void updatePreferredPeers() {
         ArrayList<Integer> oldPreferredPeerIds = new ArrayList<>(_preferredPeerIds);
-        if (!_pInfo._hasFile) {
+        if (!_peers.get(_peerId)._hasFile) {
             _preferredPeerIds = new ArrayList<Integer>(_downloadRates.entrySet().stream()
                     .filter(entry -> _interestedPeerIds.contains(entry.getKey())).sorted((e1, e2) -> {
                         int valueCompare = e2.getValue().compareTo(e1.getValue());
@@ -220,9 +219,6 @@ public class peerProcess {
             case BITFIELD:
                 // Add peer bitfield
                 _peers.get(peerId)._bitfield = message._mdata;
-                for (byte b : _peers.get(peerId)._bitfield) {
-                    System.out.println(Integer.toBinaryString(b & 255 | 256).substring(1));
-                }
                 // Respond if interested
                 if (decideInterestInPeer(peerId)) {
                     System.out.println("PEER " + _peerId + " interested in peer " + peerId);
@@ -231,6 +227,7 @@ public class peerProcess {
                     responseMessage = new Message(Message.TYPES.NOT_INTERESTED, null);
                 }
                 break;
+
             case CHOKE:
                 // Remove all requests from connected peer
                 // TODO: Implement removePendingRequests()
@@ -289,8 +286,6 @@ public class peerProcess {
 
     public boolean decideInterestInPeer(int peerId) {
         int numPieces = getNeededPiecesFromPeer(peerId).size();
-        System.out.println("Peer " + _peerId + " is deciding interest in peer " + peerId + ": number of pieces needed: "
-                + numPieces);
         return (numPieces > 0);
     }
 

@@ -65,7 +65,6 @@ public class Server implements Runnable {
 				_peerProcess._servers.put(_clientId, this);
 
 				// Log connection
-				System.out.println("LOG: Peer " + _peerProcess._peerId + " is connected from Peer " + _clientId);
 				try {
 					_peerProcess._log.LogTCPFrom(_clientId);
 				} catch (IOException e) {
@@ -92,7 +91,7 @@ public class Server implements Runnable {
 			try {
 				// FIXME: Used to get the catch to shut up for now DELETE LATER
 				_out.flush();
-				System.out.println("Now Running Server" + _peerProcess._peerId+ " connected to " + _clientId);
+				System.out.println("Now Running Server " + _peerProcess._peerId+ " connected to " + _clientId);
 				while (true) {
 					// Get message from socket
 					Message currMsg = receiveMessage();
