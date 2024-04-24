@@ -7,6 +7,117 @@ Group project for CNT4007 Computer Networking Fundamentals.
 - Kyle Thompson - @Kyle-912
 
 ## Implimentation
+### peerProcess.java
+#### *peerProcess*
+
+#### *readCommonConfig*
+
+#### *readPeerInfoConfig*
+
+#### *startServer*
+
+#### *initializeFileData*
+
+#### *connectToPeers*
+
+#### *connectToPeer*
+
+#### *updatePreferredPeers*
+
+#### *updateOptimisticallyUnchokedPeer*
+
+#### *handleMessage*
+
+#### *decideInterestInPeer*
+
+#### *getNeededPiecesFromPeer*
+
+#### *addRequest*
+
+#### *getNotRequestedRandomPieceNeededfromPeer*
+
+### PeerInfo.java
+#### *PeerInfo*
+
+#### *updateBitfield*
+
+#### *hasCompleteFile*
+
+
+### Client.java
+#### *Client*
+
+#### *run*
+
+#### *sendMessage*
+
+#### *receiveMessage*
+
+#### *sendNotIntMessage*
+
+
+### Server.java
+#### *Server*
+
+#### *run*
+
+#### *start*
+
+#### *Handler*
+
+#### *run*
+
+#### *sendMessage*
+
+#### *receiveMessage*
+
+#### *sendHaveMessage*
+
+#### *unchoke*
+
+#### *choke*
+
+
+### Log.java
+#### *Log*
+
+#### *createLog*
+
+#### *LogTCPTo*
+
+#### *LogTCPFrom*
+
+#### *LogChangeNeighbors*
+
+#### *LogOptimisticChange*
+
+#### *LogUnchoked*
+
+#### *LogChoked*
+
+#### *LogReceivedHave*
+
+#### *LogReceivedInterested*
+
+#### *LogReceivedNotInterested*
+
+#### *LogDownloadedPiece*
+
+#### *LogDownloadComplete*
+
+
+### Message.java
+#### *getTypeName*
+
+#### *Message*
+
+#### *Message*
+
+#### *getMessageBytes*
+
+#### *getHandshakeMsg*
+
+#### *readHandshakeMsg*
 
 
 ## How to Run
