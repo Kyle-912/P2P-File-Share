@@ -9,31 +9,31 @@ Group project for CNT4007 Computer Networking Fundamentals.
 ## Implimentation
 ### peerProcess.java
 #### *peerProcess*
-
+Creates the log and scheduler and calls all functions necessary to start a peer.
 #### *readCommonConfig*
-
+Reads in the Common.cfg file and stores it's values to internal data structures.
 #### *readPeerInfoConfig*
-
+Reads in the PeerInfo.cfg file and stores it's values to internal data structures.
 #### *startServer*
-
+Starts up thread for the server.
 #### *initializeFileData*
-
+Creates file for the peer to write to once it gets all the pieces.
 #### *connectToPeers*
-
+Loops through all peers calling ConnectToPeer for them.
 #### *connectToPeer*
-
+Starts up a client thread for each peer.
 #### *updatePreferredPeers*
-
+Changes which peers the file is being exchanged with based on download rate.
 #### *updateOptimisticallyUnchokedPeer*
-
+Randomly chooses a peer to exchange the file with to give it a chance and to measure it's download rate
 #### *handleMessage*
-
+Builds a response message and takes action based on the message which was received.
 #### *decideInterestInPeer*
-
+Determines if a peer has pieces that the current peer needs.
 #### *getNeededPiecesFromPeer*
-
+Compares the current peers bitmap to another peers bitmap to find how many pieces are needed from them.
 #### *addRequest*
-
+Adds piece request to internal data structure.
 #### *getNotRequestedRandomPieceNeededfromPeer*
 
 ### PeerInfo.java
