@@ -46,36 +46,56 @@ Adds piece request to internal data structure.
 
 ### Client.java
 #### *Client*
+In the constructor we pass the host string, the port number, the serverId (peerId's server which we are connecting to) and the peerProcess parent object
+We initialize all these into class variables, then establish a handshake connection and log it.
 
 #### *run*
+In our run for the Client, similar to the Server, we are running an endless loop that receives a message and then paases the message synchrounously to the 
+parent peerProcess object. Then depending on what the return value is sends a message back to the server.
 
 #### *sendMessage*
+Takes in a byte array and writes to the object output stream. 
 
 #### *receiveMessage*
+Is called from the run() and takes in a byte array message through the object input stream, which is then initiliazed as a Messge object from the byte array.
 
 #### *sendNotIntMessage*
-
+Sends a notInterested message to another Peer's Server. This is called from the PeerProcess class.
 
 ### Server.java
 #### *Server*
+In our Server constructor we pass in the port number, and the parent process as parameters and initialize them into class variables. This also acts as a listenr
+for when our handler is not accepting messages.
 
 #### *run*
+Run calls start with exception checking.
 
 #### *start*
+Start creates a new server socket port and listens for incoming tcp requests, for which it creates a new handler when it does receive one.
 
 #### *Handler*
+A handler passed a socket connection and a peerProcess Parent object. It also creates the out and in object streams, 
+establishes a handshake, and sends the bitfield of the peer to the client.
 
 #### *run*
+In our run for the Server, similar to the Client, we are running an endless loop that receives a message and then paases the message synchrounously to the 
+parent peerProcess object. Then depending on what the return value is sends a message back to the client.
+
 
 #### *sendMessage*
+Takes in a byte array and writes to the object output stream. 
 
 #### *receiveMessage*
+Is called from the run() and takes in a byte array message through the object input stream, which is then initiliazed as a Messge object from the byte array.
 
 #### *sendHaveMessage*
+Sends a have message to the client that we have a specific piece.
 
 #### *unchoke*
+Sends an unchoke to the conncected client.
 
 #### *choke*
+Sends a choke to the connected client.
 
 
 ### Log.java
