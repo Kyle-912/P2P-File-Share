@@ -59,7 +59,6 @@ public class Client extends Thread {
 
 				// Send response message if applicable
 				if (respMsg != null) {
-					System.out.println("Client " + _peerProcess._peerId + " Sending message " + respMsg.getTypeName());
 					sendMessage(respMsg.getMessageBytes());
 				}
 			}

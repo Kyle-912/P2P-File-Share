@@ -39,8 +39,7 @@ public class peerProcess {
     byte[] _fileBytes;
 
     public static void main(String args[]) throws Exception {
-        peerProcess peerProcess = new peerProcess(Integer.parseInt(args[0]));
-        System.out.println("Peer " + peerProcess._peerId + " is running");
+        new peerProcess(Integer.parseInt(args[0]));
     }
 
     public peerProcess(int peerId) throws Exception {
@@ -189,10 +188,8 @@ public class peerProcess {
         _servers.forEach((key, value) -> {
             if (toUnchoke.contains(key)) {
                 value.unchoke();
-                System.out.println("Unchoked " + key + " due to updatePreferredPeers");
             } else if (toChoke.contains(key)) {
                 value.choke();
-                System.out.println("Choked " + key + " due to updatePreferredPeers");
             }
         });
 
@@ -221,10 +218,8 @@ public class peerProcess {
                 if (key.equals(_optimisticallyUnchokedPeerId)
                         && !_preferredPeerIds.contains(_optimisticallyUnchokedPeerId)) {
                     value.choke();
-                    System.out.println("Choked " + key + " due to updateOptimisticallyUnchokedPeer");
                 } else if (key.equals(newOptimisticallyUnchokedPeerId)) {
                     value.unchoke();
-                    System.out.println("Unchoked " + key + " due to updateOptimisticallyUnchokedPeer");
                 }
             });
 
@@ -235,8 +230,6 @@ public class peerProcess {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else {
-            System.out.println("Optimistically unchoked candidate list is empty.");
         }
     }
 
@@ -248,7 +241,6 @@ public class peerProcess {
                 _peers.get(otherPeerId)._bitfield = message._mdata;
                 // Respond if interested
                 if (decideInterestInPeer(otherPeerId)) {
-                    System.out.println("PEER " + _peerId + " interested in peer " + otherPeerId);
                     responseMessage = new Message(Message.TYPES.INTERESTED, null);
                 } else {
                     responseMessage = new Message(Message.TYPES.NOT_INTERESTED, null);
@@ -256,7 +248,6 @@ public class peerProcess {
                 break;
 
             case CHOKE:
-                System.out.println("Choked by peer " + otherPeerId);
                 if (_recentRequests.get(otherPeerId) != null) {
                     _requests.removeAll(_recentRequests.get(otherPeerId));
                 }
@@ -270,7 +261,6 @@ public class peerProcess {
                 break;
 
             case UNCHOKE:
-                System.out.println("Unchoked by peer " + otherPeerId);
                 try {
                     _log.LogUnchoked(otherPeerId);
                 } catch (IOException e) {
@@ -363,9 +353,6 @@ public class peerProcess {
                 // Split message data into piece index and data
                 ByteBuffer data = ByteBuffer.wrap(message._mdata);
                 int pieceReceivedInd = data.getInt();
-                if (data.remaining() != _pieceSize) {
-                    System.out.println("Received piece size is incorrect");
-                }
                 byte[] pieceReceivedData = new byte[data.remaining()];
                 data.get(pieceReceivedData);
 
@@ -398,11 +385,9 @@ public class peerProcess {
                 if (_peers.get(_peerId).hasCompleteFile()) {
                     try {
                         // Write data to output file
-                        System.out.println("Starting write file");
                         FileOutputStream oStream = new FileOutputStream(_file);
                         oStream.write(_fileBytes);
                         oStream.close();
-                        System.out.println("Finished write file");
 
                         // Log complete file
                         _log.LogDownloadComplete();

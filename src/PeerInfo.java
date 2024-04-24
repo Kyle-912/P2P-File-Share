@@ -28,7 +28,6 @@ public class PeerInfo {
 
     public void updateBitfield(int pieceIndex) {
         _bitfield[pieceIndex / 8] = (byte) (_bitfield[pieceIndex / 8] | (1 << (7 - (pieceIndex % 8))));
-        System.out.println("Adding piece " + pieceIndex);
     }
 
     public boolean hasCompleteFile() {

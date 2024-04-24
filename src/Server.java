@@ -102,8 +102,6 @@ public class Server implements Runnable {
 
 					// Send response message if applicable
 					if (respMsg != null) {
-						System.out.println(
-								"Server " + _peerProcess._peerId + " Sending message " + respMsg.getTypeName());
 						sendMessage(respMsg.getMessageBytes());
 					}
 				}
