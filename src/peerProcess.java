@@ -3,7 +3,6 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.*;
-import java.lang.Math;
 
 public class peerProcess {
     // File locations
@@ -95,7 +94,7 @@ public class peerProcess {
                     }
                 }
             }
-            _numPieces = Math.ceilDiv(_fileSize, _pieceSize);
+            _numPieces = (_fileSize + _pieceSize - 1) / _pieceSize;
         } catch (IOException e) {
             System.out.println("Failure to read file: " + filePath);
             e.printStackTrace();
@@ -342,7 +341,7 @@ public class peerProcess {
                 // Load piece from _fileBytes
                 int pieceNum = ByteBuffer.wrap(message._mdata).getInt();
                 int ind = pieceNum * _pieceSize;
-                int pieceReturnSize = Math.min(_pieceSize, _fileSize - ind);
+                int pieceReturnSize = (_fileSize - ind) < _pieceSize ? (_fileSize - ind) : _pieceSize;
                 byte[] pieceBytes = Arrays.copyOfRange(_fileBytes, ind, ind + pieceReturnSize);
 
                 // Return PIECE message to server
