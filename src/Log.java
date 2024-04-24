@@ -111,11 +111,9 @@ public class Log {
 	public void LogReceivedHave(int peer, int pieceIndex) throws IOException {
 		LocalDateTime now = LocalDateTime.now();
 		try {
-			_writer.write(now + ": Peer " + _pid + " received the 'have' message from " + peer + " for the piece "
-					+ pieceIndex + ".\n");
+			_writer.write(now + ": Peer " + _pid + " received the 'have' message from " + peer + " for the piece " + pieceIndex + ".\n");
 			_writer.flush();
-			System.out.println(now + ": Peer " + _pid + " received the 'have' message from " + peer + " for the piece "
-					+ pieceIndex + ".\n");
+			System.out.println(now + ": Peer " + _pid + " received the 'have' message from " + peer + " for the piece " + pieceIndex + ".\n");
 		} catch (IOException e) {
 			System.out.print("Error writing to peer log");
 		}
@@ -150,11 +148,9 @@ public class Log {
 		LocalDateTime now = LocalDateTime.now();
 		_numPieces += 1;
 		try {
-			_writer.write(now + ": Peer " + _pid + " has downloaded the piece " + pieceIndex + " from " + peer
-					+ ". Now the number of pieces it has is " + _numPieces + ".\n");
+			_writer.write(now + ": Peer " + _pid + " has downloaded the piece " + pieceIndex + " from " + peer + ". Now the number of pieces it has is " + _numPieces + ".\n");
 			_writer.flush();
-			System.out.println(now + ": Peer " + _pid + " has downloaded the piece " + pieceIndex + " from " + peer
-					+ ". Now the number of pieces it has is " + _numPieces + ".\n");
+			System.out.println(now + ": Peer " + _pid + " has downloaded the piece " + pieceIndex + " from " + peer + ". Now the number of pieces it has is " + _numPieces + ".\n");
 		} catch (IOException e) {
 			System.out.print("Error writing to peer log");
 		}

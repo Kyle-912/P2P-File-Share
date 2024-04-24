@@ -38,7 +38,6 @@ public class Server implements Runnable {
 	public static class Handler extends Thread {
 		peerProcess _peerProcess; // ParentPeerProcess object will be used with synchronized methods to delegate tasks when messages sent and received
 		private byte[] _messageIn; // Message received from the client
-		//private byte[] _messageOut; // Message sent to the client
 		private Socket _connection;
 		private ObjectInputStream _in; // Stream read from the socket
 		private ObjectOutputStream _out; // Stream written to the socket
@@ -77,8 +76,7 @@ public class Server implements Runnable {
 				}
 
 				// Respond to client with server peer's bitfield
-				byte[] msg = new Message(Message.TYPES.BITFIELD,
-						_peerProcess._peers.get(_peerProcess._peerId)._bitfield).getMessageBytes();
+				byte[] msg = new Message(Message.TYPES.BITFIELD, _peerProcess._peers.get(_peerProcess._peerId)._bitfield).getMessageBytes();
 				sendMessage(msg);
 
 			} catch (Exception e) {
@@ -145,8 +143,7 @@ public class Server implements Runnable {
 		}
 
 		public void sendHaveMessage(int pieceNum) {
-			sendMessage(
-					new Message(Message.TYPES.HAVE, ByteBuffer.allocate(4).putInt(pieceNum).array()).getMessageBytes());
+			sendMessage(new Message(Message.TYPES.HAVE, ByteBuffer.allocate(4).putInt(pieceNum).array()).getMessageBytes());
 		}
 
 		public void unchoke() {

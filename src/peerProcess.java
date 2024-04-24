@@ -51,8 +51,7 @@ public class peerProcess {
         startServer();
         connectToPeers();
         _scheduler.scheduleAtFixedRate(this::updatePreferredPeers, 0, _unchokingInterval, TimeUnit.SECONDS);
-        _scheduler.scheduleAtFixedRate(this::updateOptimisticallyUnchokedPeer, 1, _optimisticUnchokingInterval,
-                TimeUnit.SECONDS);
+        _scheduler.scheduleAtFixedRate(this::updateOptimisticallyUnchokedPeer, 1, _optimisticUnchokingInterval, TimeUnit.SECONDS);
     }
 
     private void readCommonConfig() {
@@ -211,12 +210,10 @@ public class peerProcess {
 
         if (!optimisticallyUnchokedCandidates.isEmpty()) {
             Random random = new Random();
-            Integer newOptimisticallyUnchokedPeerId = optimisticallyUnchokedCandidates
-                    .get(random.nextInt(optimisticallyUnchokedCandidates.size()));
+            Integer newOptimisticallyUnchokedPeerId = optimisticallyUnchokedCandidates.get(random.nextInt(optimisticallyUnchokedCandidates.size()));
 
             _servers.forEach((key, value) -> {
-                if (key.equals(_optimisticallyUnchokedPeerId)
-                        && !_preferredPeerIds.contains(_optimisticallyUnchokedPeerId)) {
+                if (key.equals(_optimisticallyUnchokedPeerId) && !_preferredPeerIds.contains(_optimisticallyUnchokedPeerId)) {
                     value.choke();
                 } else if (key.equals(newOptimisticallyUnchokedPeerId)) {
                     value.unchoke();
@@ -283,8 +280,7 @@ public class peerProcess {
                     _recentRequests.put(otherPeerId, newPeerRequestList);
 
                     // Modify response message
-                    responseMessage = new Message(Message.TYPES.REQUEST,
-                            ByteBuffer.allocate(4).putInt(pieceNum).array());
+                    responseMessage = new Message(Message.TYPES.REQUEST, ByteBuffer.allocate(4).putInt(pieceNum).array());
                 } else {
                     System.out.println("Not interested in unchoked peer " + otherPeerId);
                 }
@@ -314,9 +310,7 @@ public class peerProcess {
 
             case HAVE:
                 byte[] otherBitfield = _peers.get(otherPeerId)._bitfield;
-                otherBitfield[ByteBuffer.wrap(message._mdata).getInt()
-                        / 8] = (byte) (otherBitfield[ByteBuffer.wrap(message._mdata).getInt() / 8]
-                                | (1 << (7 - (ByteBuffer.wrap(message._mdata).getInt() % 8))));
+                otherBitfield[ByteBuffer.wrap(message._mdata).getInt() / 8] = (byte) (otherBitfield[ByteBuffer.wrap(message._mdata).getInt() / 8] | (1 << (7 - (ByteBuffer.wrap(message._mdata).getInt() % 8))));
                 _peers.get(otherPeerId)._bitfield = otherBitfield;
 
                 if (decideInterestInPeer(otherPeerId)) {
@@ -407,8 +401,9 @@ public class peerProcess {
                 if (decideInterestInPeer(otherPeerId)) {
                     // Get random interesting piece number and add to list
                     int getPieceNum = getNotRequestedRandomPieceNeededfromPeer(otherPeerId);
-                    if (getPieceNum == -1)
+                    if (getPieceNum == -1) {
                         break;
+                    }
                     addRequest(getPieceNum);
 
                     // Modify peer specific requests
@@ -420,8 +415,7 @@ public class peerProcess {
                     _recentRequests.put(otherPeerId, newPeerRequestList);
 
                     // Make request message for client to send
-                    responseMessage = new Message(Message.TYPES.REQUEST,
-                            ByteBuffer.allocate(4).putInt(getPieceNum).array());
+                    responseMessage = new Message(Message.TYPES.REQUEST, ByteBuffer.allocate(4).putInt(getPieceNum).array());
                 }
                 break;
 
